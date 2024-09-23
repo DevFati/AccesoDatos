@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MISLIBRERIAS>
+    <Mislibrerias>
+        <Libreria>
+            <nombre>Prueba de libreria JAXB</nombre>
+            <lugar>Talavera, como no</lugar>
+            <MiListaLibros>
+                <Libro>
+                    <autor>Alicia Ramos</autor>
+                    <nombre>Entornos de Desarrollo</nombre>
+                    <editorial>Garceta</editorial>
+                    <isbn>978-84-1545-297-3</isbn>
+                </Libro>
+                <Libro>
+                    <autor>Maria Jesús Ramos</autor>
+                    <nombre>Acceso a Datos</nombre>
+                    <editorial>Garceta</editorial>
+                    <isbn>978-84-1545-228-7</isbn>
+                </Libro>
+            </MiListaLibros>
+        </Libreria>
+        <Libreria>
+            <nombre>Prueba libreria2</nombre>
+            <lugar>Talavera, libre2</lugar>
+            <MiListaLibros>
+                <Libro>
+                    <autor>Alicia RamosLIB2</autor>
+                    <nombre>Entornos de DesarrolloLIB2</nombre>
+                    <editorial>Garceta</editorial>
+                    <isbn>978-84-1545-297-3</isbn>
+                </Libro>
+                <Libro>
+                    <autor>Maria Jesús RamosLIB2</autor>
+                    <nombre>Acceso a DatosLIB2</nombre>
+                    <editorial>Garceta</editorial>
+                    <isbn>978-84-1545-228-7</isbn>
+                </Libro>
+            </MiListaLibros>
+        </Libreria>
+    </Mislibrerias>
+</MISLIBRERIAS>
