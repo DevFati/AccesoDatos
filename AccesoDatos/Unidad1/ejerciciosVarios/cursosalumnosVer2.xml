@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cursosalumnos>
+    <curso>
+        <nombre>1ESO</nombre>
+        <alumnos>
+            <alumno>
+                <nombre>Alicia García</nombre>
+                <notamedia>8.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>Tomás Valverde</nombre>
+                <notamedia>6.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>Arturo Gil</nombre>
+                <notamedia>6.0</notamedia>
+            </alumno>
+        </alumnos>
+    </curso>
+    <curso>
+        <nombre>2ESO</nombre>
+        <alumnos>
+            <alumno>
+                <nombre>Ana Isabel Marín</nombre>
+                <notamedia>8.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>Pedro Ramos</nombre>
+                <notamedia>5.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>Fernando Albricio</nombre>
+                <notamedia>6.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>María Casado</nombre>
+                <notamedia>5.0</notamedia>
+            </alumno>
+        </alumnos>
+    </curso>
+    <curso>
+        <nombre>3ESO</nombre>
+        <alumnos>
+            <alumno>
+                <nombre>Ana María Roldán</nombre>
+                <notamedia>5.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>Pablo Almeida</nombre>
+                <notamedia>7.0</notamedia>
+            </alumno>
+            <alumno>
+                <nombre>Juan Manuel López</nombre>
+                <notamedia>7.0</notamedia>
+            </alumno>
+        </alumnos>
+    </curso>
+</cursosalumnos>

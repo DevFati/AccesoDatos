@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ventasarticulos>
+ <articulo>
+  	<codigo>ART-112</codigo>
+  	<denominacion>Pala Padel NOX</denominacion>
+  	<stock>20</stock>
+  	<precio>70</precio>
+ </articulo>
+ <ventas>
+  	<venta>
+   		<numventa>10</numventa>
+   		<unidades>2</unidades>
+   		<nombrecliente>Alicia Ramos</nombrecliente>
+   		<fecha>10-10-2015</fecha>
+ 	</venta>
+    	<venta>
+   		<numventa>11</numventa>
+   		<unidades>2</unidades>
+   		<nombrecliente>Pedro García</nombrecliente>
+  		 <fecha>15-10-2015</fecha>
+  	</venta>
+    	<venta>
+   		<numventa>12</numventa>
+   		<unidades>6</unidades>
+   		<nombrecliente>Alberto Gil</nombrecliente>
+   		<fecha>20-10-2015</fecha>
+  	</venta>  
+ </ventas>
+</ventasarticulos>

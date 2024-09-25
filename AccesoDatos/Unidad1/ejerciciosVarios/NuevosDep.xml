@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Nuevosdepartamentos>
+ <departamento>
+   <deptno>9</deptno>
+   <dnombre>VENTAS</dnombre>
+   <localidad>Talavera</localidad>
+ </departamento>
+  <departamento>
+   <deptno>21</deptno>
+   <dnombre>COMPRAS</dnombre>
+   <localidad>OROPESA</localidad>
+ </departamento>
+ <departamento>
+   <deptno>19</deptno>
+   <dnombre>INFORMATICA</dnombre>
+   <localidad>Madrid</localidad>
+ </departamento>
+ <departamento>
+   <deptno>13</deptno>
+   <dnombre>CUENTAS</dnombre>
+   <localidad>Madrid</localidad>
+ </departamento>
+  <departamento>
+   <deptno>20</deptno>
+   <dnombre>MATES</dnombre>
+   <localidad>Talavera</localidad>
+ </departamento>
+ <departamento>
+   <deptno>25</deptno>
+   <dnombre>ELECTRONICA</dnombre>
+   <localidad>Talavera</localidad>
+ </departamento>
+ <departamento>
+   <deptno>40</deptno>
+   <dnombre>PERSONAL</dnombre>
+   <localidad>Toledo</localidad>
+ </departamento>
+  <departamento>
+   <deptno>45</deptno>
+   <dnombre>NOMINAS</dnombre>
+   <localidad>Toledo</localidad>
+ </departamento>
+  <departamento>
+   <deptno>50</deptno>
+   <dnombre>SECRETARIA</dnombre>
+   <localidad>Toledo</localidad>
+ </departamento>
+  <departamento>
+   <deptno>55</deptno>
+   <dnombre>AGRARIO</dnombre>
+   <localidad>Talavera</localidad>
+ </departamento>
+</Nuevosdepartamentos>
+
+
