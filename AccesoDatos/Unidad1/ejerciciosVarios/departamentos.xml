@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<departamentos>
+    <lista>
+        <id>10</id>
+        <localidad>TALAVERA</localidad>
+        <nombre>VENTAS</nombre>
+        <numemple>3</numemple>
+        <salario>1000.0</salario>
+    </lista>
+    <lista>
+        <id>20</id>
+        <localidad>TALAVERA</localidad>
+        <nombre>INFORMÁTICA</nombre>
+        <numemple>2</numemple>
+        <salario>1500.0</salario>
+    </lista>
+    <lista>
+        <id>30</id>
+        <localidad>TOLEDO</localidad>
+        <nombre>CONTABILIDAD</nombre>
+        <numemple>1</numemple>
+        <salario>1600.0</salario>
+    </lista>
+    <lista>
+        <id>40</id>
+        <localidad>TOLEDO</localidad>
+        <nombre>COMPRAS</nombre>
+        <numemple>2</numemple>
+        <salario>1400.0</salario>
+    </lista>
+    <lista>
+        <id>50</id>
+        <localidad>TALAVERA</localidad>
+        <nombre>FORMACIÓN</nombre>
+        <numemple>4</numemple>
+        <salario>1600.0</salario>
+    </lista>
+</departamentos>

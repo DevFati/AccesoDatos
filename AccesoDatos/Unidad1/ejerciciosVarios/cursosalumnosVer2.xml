@@ -55,4 +55,7 @@
             </alumno>
         </alumnos>
     </curso>
+    <curso>
+    	<nombre>nuevo</nombre>
+    </curso>
 </cursosalumnos>

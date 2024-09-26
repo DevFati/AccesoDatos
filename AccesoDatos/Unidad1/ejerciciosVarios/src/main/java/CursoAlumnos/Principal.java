@@ -16,32 +16,40 @@ public class Principal {
 	try {
 		context = JAXBContext.newInstance(cursosalumnos.class);
 		Unmarshaller unmars = context.createUnmarshaller();
-		cursosalumnos objeto = (cursosalumnos) unmars.unmarshal(new File("cursosalumnosVer2.xml"));
+		cursosalumnos objeto = (cursosalumnos) unmars.unmarshal(new File(".\\cursosalumnosVer2.xml"));
 		
 		ArrayList<Curso> cursos=objeto.getCursos(); 
 		
 		
 		System.out.println("Número de cursos: "+cursos.size());
 		
+		
 		for(Curso v: cursos) {
 			System.out.println("CURSO: "+v.getNombre());
 			System.out.println();
 			float suma=0;
 			float contador=0;
-			System.out.printf("%10s %20s %11s%n","  ","NOMBRE","NOTA MEDIA");
-			System.out.printf("%10s %20s %11s%n","  ","-------------","-------------");
-			for(Alumno a:v.getAlumnos()) {
+			ArrayList<Alumno> lista=v.getAlumnos();
+			if(lista!=null) {
+				System.out.printf("%10s %20s %11s%n","  ","NOMBRE","NOTA MEDIA");
+				System.out.printf("%10s %20s %11s%n","  ","-------------","-------------");
 				
-			
-				System.out.printf("%10s %20s %11s%n","  ",a.getNombre(),a.getNotamedia());
-				suma=suma+a.getNotamedia();
-				contador++;
+				for(Alumno a:v.getAlumnos()) {
+					
+					
+					System.out.printf("%10s %20s %11s%n","  ",a.getNombre(),a.getNotamedia());
+					suma=suma+a.getNotamedia();
+					contador++;
+				}
 			}
-			System.out.printf("%10s %20s %11s%n","  ","-------------","-------------");
-		//	System.out.println(suma);
-			//System.out.println(contador);
-			float media=(float)Math.round((suma/contador)*100)/100;
-			System.out.printf("%10s %20s %11s%n","  ","MEDIA:  ",media);
+			if(suma !=0 && contador!=0) {
+				System.out.printf("%10s %20s %11s%n","  ","-------------","-------------");
+				//	System.out.println(suma);
+					//System.out.println(contador);
+					float media=(float)Math.round((suma/contador)*100)/100;
+					System.out.printf("%10s %20s %11s%n","  ","MEDIA:  ",media);
+			}
+			
 			System.out.println();
 			
 			
