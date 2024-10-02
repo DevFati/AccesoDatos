@@ -42,6 +42,9 @@ public class Principal {
 					case 4:
 						crearXML();
 						break;
+					case 5: 
+						crearXML2();
+						break;
 
 					
 					case 0:
@@ -57,6 +60,124 @@ public class Principal {
 		
 	}
 	
+	private static void crearXML2() throws IOException {
+		Productos2 productos=new Productos2();
+		
+		ArrayList<Producto2> lista=cargarproductos2();
+		 lista=datosventas2(lista);
+		 productos.setLista(lista);
+		 
+		// crear el XML
+			JAXBContext context;
+			try {
+				context = JAXBContext.newInstance(Productos2.class);
+
+				Marshaller m = context.createMarshaller();
+				m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				m.marshal(productos, System.out);
+				m.marshal(productos, new File(".\\Productos2.xml"));
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+
+	private static ArrayList<Producto2> datosventas2(ArrayList<Producto2> lista) throws IOException {
+		File fiche= new File("DatosdeVentas.dat");
+		try {
+			RandomAccessFile file = new RandomAccessFile(fiche, "r");
+
+			long posicion = 0;
+					
+			for (;;) {
+
+			file.seek(posicion); // nos posicionamos en posicion
+				int cod = file.readInt();
+				int uniV=file.readInt();
+				if (cod != 0) {
+					String fecha = "";
+					for (int i = 0; i < 10; i++) {
+						fecha = fecha + file.readChar();
+					}
+
+					
+
+				
+					for(Producto2 p: lista) {
+						
+						if(p.getCodigo()==cod) {
+							p.getListaventas().add(new Venta(uniV,fecha,uniV*p.getPrecio()));
+							
+							
+								
+							
+							
+							
+						}
+					}
+				}
+
+				posicion = posicion + 28;
+				if (posicion >= file.length())
+					break;
+
+			}
+			
+			file.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	
+		return lista;
+	
+	}
+
+	private static ArrayList<Producto2> cargarproductos2() throws IOException {
+		ArrayList<Producto2> lista= new ArrayList<Producto2>();
+		File fiche= new File("Productos.dat");
+		try {
+			RandomAccessFile file = new RandomAccessFile(fiche, "r");
+
+			long posicion = 0;
+			for (;;) {
+
+			file.seek(posicion); // nos posicionamos en posicion
+				int cod = file.readInt();
+				if (cod != 0) {
+					String nom = "";
+					for (int i = 0; i < 15; i++) {
+						nom = nom + file.readChar();
+					}
+
+					
+
+					int exis = file.readInt();
+					double precio=file.readDouble();
+					Producto2 prod= new Producto2(cod, nom.trim(),exis,precio );
+					lista.add(prod);	
+					System.out.println("Producto " + cod + " añadido a la lista");
+				}
+
+				posicion = posicion + 46;
+				if (posicion >= file.length())
+					break;
+
+			}
+			
+			file.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		return lista;
+	}
+
 	private static void crearXML() throws IOException {
 		Productos productos=new Productos();
 		
@@ -147,10 +268,6 @@ public class Principal {
 			RandomAccessFile file = new RandomAccessFile(fiche, "r");
 
 			long posicion = 0;
-			
-			
-			
-		
 			for (;;) {
 
 			file.seek(posicion); // nos posicionamos en posicion
@@ -165,10 +282,6 @@ public class Principal {
 
 					int exis = file.readInt();
 					double precio=file.readDouble();
-		
-
-					// creamos el objeto Dep, y lo añadimos a la lista
-					//usamos trim para que los espacios entre nom y loc no esten 
 					Producto prod= new Producto(cod, nom.trim(),exis,0,0,"", precio );
 					lista.add(prod);	
 					System.out.println("Producto " + cod + " añadido a la lista");
@@ -379,7 +492,8 @@ public class Principal {
 		System.out.println("  1. Ejercicio 1. Listar productos.");
 		System.out.println("  2. Ejercicio 2. Listar ventas.");
 		System.out.println("  3. Ejercicio 3. Actualizar.");
-		System.out.println("  4. Ejercicio 4. Crear XML.");		
+		System.out.println("  4. Ejercicio 4. Crear XML.");	
+		System.out.println("  5. Ejercicio 5. Crear XML2.");
 		System.out.println("  0. Salir");
 		System.out.println("------------------------------------------------------");
 	}

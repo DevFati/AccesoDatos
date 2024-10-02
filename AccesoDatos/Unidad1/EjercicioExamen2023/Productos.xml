@@ -3,7 +3,7 @@
     <lista>
         <codigo>4</codigo>
         <nombre>Mesas</nombre>
-        <existencias>-15</existencias>
+        <existencias>-40</existencias>
         <precio>90.5</precio>
         <unidadesVendidas>25</unidadesVendidas>
         <importe>2262.5</importe>
@@ -12,16 +12,16 @@
     <lista>
         <codigo>8</codigo>
         <nombre>Cuadernos</nombre>
-        <existencias>195</existencias>
+        <existencias>90</existencias>
         <precio>3.5</precio>
         <unidadesVendidas>105</unidadesVendidas>
         <importe>367.5</importe>
-        <estado></estado>
+        <estado>A reponer</estado>
     </lista>
     <lista>
         <codigo>9</codigo>
         <nombre>Bolígrafos</nombre>
-        <existencias>50</existencias>
+        <existencias>0</existencias>
         <precio>1.5</precio>
         <unidadesVendidas>50</unidadesVendidas>
         <importe>75.0</importe>
@@ -30,7 +30,7 @@
     <lista>
         <codigo>13</codigo>
         <nombre>Lapiceros 10</nombre>
-        <existencias>440</existencias>
+        <existencias>380</existencias>
         <precio>3.5</precio>
         <unidadesVendidas>60</unidadesVendidas>
         <importe>210.0</importe>
@@ -39,7 +39,7 @@
     <lista>
         <codigo>14</codigo>
         <nombre>Portátil</nombre>
-        <existencias>-3</existencias>
+        <existencias>-28</existencias>
         <precio>250.2</precio>
         <unidadesVendidas>25</unidadesVendidas>
         <importe>6255.0</importe>
@@ -57,7 +57,7 @@
     <lista>
         <codigo>17</codigo>
         <nombre>Tablet Acer</nombre>
-        <existencias>10</existencias>
+        <existencias>0</existencias>
         <precio>225.5</precio>
         <unidadesVendidas>10</unidadesVendidas>
         <importe>2255.0</importe>
@@ -75,7 +75,7 @@
     <lista>
         <codigo>21</codigo>
         <nombre>Estuches</nombre>
-        <existencias>235</existencias>
+        <existencias>220</existencias>
         <precio>10.5</precio>
         <unidadesVendidas>15</unidadesVendidas>
         <importe>157.5</importe>
@@ -84,7 +84,7 @@
     <lista>
         <codigo>24</codigo>
         <nombre>Tarjetero</nombre>
-        <existencias>10</existencias>
+        <existencias>-30</existencias>
         <precio>2.5</precio>
         <unidadesVendidas>40</unidadesVendidas>
         <importe>100.0</importe>
@@ -111,7 +111,7 @@
     <lista>
         <codigo>42</codigo>
         <nombre>Teclado 80</nombre>
-        <existencias>-70</existencias>
+        <existencias>-180</existencias>
         <precio>15.5</precio>
         <unidadesVendidas>110</unidadesVendidas>
         <importe>1705.0</importe>
@@ -129,7 +129,7 @@
     <lista>
         <codigo>62</codigo>
         <nombre>Folios A4-100</nombre>
-        <existencias>-5</existencias>
+        <existencias>-30</existencias>
         <precio>2.5</precio>
         <unidadesVendidas>25</unidadesVendidas>
         <importe>62.5</importe>
@@ -138,7 +138,7 @@
     <lista>
         <codigo>74</codigo>
         <nombre>Tijeras</nombre>
-        <existencias>-10</existencias>
+        <existencias>-35</existencias>
         <precio>2.5</precio>
         <unidadesVendidas>25</unidadesVendidas>
         <importe>62.5</importe>
@@ -147,7 +147,7 @@
     <lista>
         <codigo>83</codigo>
         <nombre>Reloj cocina</nombre>
-        <existencias>2</existencias>
+        <existencias>-6</existencias>
         <precio>19.7</precio>
         <unidadesVendidas>8</unidadesVendidas>
         <importe>157.6</importe>
@@ -156,7 +156,7 @@
     <lista>
         <codigo>87</codigo>
         <nombre>Impresora AT</nombre>
-        <existencias>20</existencias>
+        <existencias>15</existencias>
         <precio>100.6</precio>
         <unidadesVendidas>5</unidadesVendidas>
         <importe>503.0</importe>
@@ -165,7 +165,7 @@
     <lista>
         <codigo>90</codigo>
         <nombre>Cubiertos</nombre>
-        <existencias>226</existencias>
+        <existencias>222</existencias>
         <precio>15.5</precio>
         <unidadesVendidas>4</unidadesVendidas>
         <importe>62.0</importe>
