@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ListaAlumnos>
+    <Alum>
+        <numalumno>1</numalumno>
+        <nombre>Antonio García</nombre>
+        <localidad>Talavera de la Reina</localidad>
+        <numasig>4</numasig>
+        <notamedia>8.75</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Matemáticas</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Lengua</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Educación Física</asignatura>
+                <nota>9.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>9.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>3</numalumno>
+        <nombre>Alicia Gil</nombre>
+        <localidad>Toledo</localidad>
+        <numasig>5</numasig>
+        <notamedia>5.7</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Lengua</asignatura>
+                <nota>3.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Matemáticas</asignatura>
+                <nota>5.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Educación Física</asignatura>
+                <nota>4.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Química</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>5</numalumno>
+        <nombre>Pedro Ramos</nombre>
+        <localidad>Talavera de la Reina</localidad>
+        <numasig>5</numasig>
+        <notamedia>6.3</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Lengua</asignatura>
+                <nota>6.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Ciencias</asignatura>
+                <nota>4.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Educación Física</asignatura>
+                <nota>3.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Química</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>6</numalumno>
+        <nombre>Amelia Taboada</nombre>
+        <localidad>Oropesa</localidad>
+        <numasig>3</numasig>
+        <notamedia>6.1666665</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Ciencias</asignatura>
+                <nota>3.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Educación Física</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>8</numalumno>
+        <nombre>María del Val</nombre>
+        <localidad>Oropesa</localidad>
+        <numasig>5</numasig>
+        <notamedia>5.7</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Matemáticas</asignatura>
+                <nota>4.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Lengua</asignatura>
+                <nota>2.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Educación Física</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>6.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Química</asignatura>
+                <nota>6.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>9</numalumno>
+        <nombre>Jose Luis Santos</nombre>
+        <localidad>Los Navalmorales</localidad>
+        <numasig>3</numasig>
+        <notamedia>7.2000003</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Lengua</asignatura>
+                <nota>5.6</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Ciencias</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>10</numalumno>
+        <nombre>Lorenzo Almeida</nombre>
+        <localidad>Toledo</localidad>
+        <numasig>4</numasig>
+        <notamedia>9.0</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Matemáticas</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Ciencias</asignatura>
+                <nota>8.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Química</asignatura>
+                <nota>9.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>9.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+    <Alum>
+        <numalumno>12</numalumno>
+        <nombre>Jesús Catalina</nombre>
+        <localidad>Talavera de la Reina</localidad>
+        <numasig>6</numasig>
+        <notamedia>8.083333</notamedia>
+        <ListaNotas>
+            <notaasig>
+                <asignatura>Música</asignatura>
+                <nota>5.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Química</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Lengua</asignatura>
+                <nota>9.0</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Ciencias</asignatura>
+                <nota>9.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Matemáticas</asignatura>
+                <nota>7.5</nota>
+            </notaasig>
+            <notaasig>
+                <asignatura>Educación Física</asignatura>
+                <nota>9.5</nota>
+            </notaasig>
+        </ListaNotas>
+    </Alum>
+</ListaAlumnos>

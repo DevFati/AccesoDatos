@@ -1,0 +1,19 @@
+----------------------------------------------------------------
+Mon Oct 07 16:52:28 CEST 2024:
+ Iniciando instancia a816c00e-0192-6777-a7d0-00000f316018 de Derby, versión The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): 
+en el directorio de base de datos D:\DB\DERBY\ejemplo con el cargador de clases jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93
+Cargado desde file:/C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/bdembebidas/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=18.0.2.1+1-1
+user.dir=C:\Users\Tarde\eclipse-workspace\AccesoDatos\Unidad2\bdembebidas\db-derby-10.14.2.0-bin\bin
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Cargador de clases de base de datos iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Oct 07 16:54:57 CEST 2024: cerrando motor de Derby
+----------------------------------------------------------------
+Mon Oct 07 16:54:57 CEST 2024:
+Cerrando la instancia a816c00e-0192-6777-a7d0-00000f316018 en el directorio de base de datos D:\DB\DERBY\ejemplo con cargador de clases jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93
+----------------------------------------------------------------

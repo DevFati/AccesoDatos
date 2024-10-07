@@ -204,10 +204,6 @@ public class Principal {
 
 
 	
-
-
-
-
 	
 
 	private static ArrayList<Producto> datosventas(ArrayList<Producto> lista) throws IOException {

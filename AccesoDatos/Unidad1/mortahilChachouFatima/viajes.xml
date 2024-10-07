@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ListaViajes>
+    <Viaje>
+        <codviaje>1</codviaje>
+        <nombreviaje>Italia Clásica</nombreviaje>
+        <precio>100</precio>
+        <numplazas>50</numplazas>
+        <operacion></operacion>
+    </Viaje>
+    <Viaje>
+        <codviaje>3</codviaje>
+        <nombreviaje>Castillos del Loira</nombreviaje>
+        <precio>210</precio>
+        <numplazas>75</numplazas>
+        <operacion>M</operacion>
+    </Viaje>
+    <Viaje>
+        <codviaje>5</codviaje>
+        <nombreviaje>Picos de Europa</nombreviaje>
+        <precio>60</precio>
+        <numplazas>30</numplazas>
+        <operacion></operacion>
+    </Viaje>
+    <Viaje>
+        <codviaje>9</codviaje>
+        <nombreviaje>Mediterráneo Valenciano</nombreviaje>
+        <precio>75</precio>
+        <numplazas>100</numplazas>
+        <operacion>A</operacion>
+    </Viaje>
+    <Viaje>
+        <codviaje>10</codviaje>
+        <nombreviaje>París nocturno</nombreviaje>
+        <precio>170</precio>
+        <numplazas>70</numplazas>
+        <operacion>M</operacion>
+    </Viaje>
+    <Viaje>
+        <codviaje>13</codviaje>
+        <nombreviaje>Portugal Algarve</nombreviaje>
+        <precio>200</precio>
+        <numplazas>80</numplazas>
+        <operacion>A</operacion>
+    </Viaje>
+    <Viaje>
+        <codviaje>15</codviaje>
+        <nombreviaje>Paris Moderno</nombreviaje>
+        <precio>150</precio>
+        <numplazas>50</numplazas>
+        <operacion>A</operacion>
+    </Viaje>
+</ListaViajes>

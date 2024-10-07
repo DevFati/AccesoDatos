@@ -9,7 +9,7 @@ import javax.xml.bind.Unmarshaller;
 
 
 public class Principal {
-	
+	//cuando queremos pasar un xml a java
 	public static void main(String[] args) {
 	JAXBContext context;
 
@@ -55,8 +55,7 @@ public class Principal {
 			
 		}
 	    
-	   
-	   	
+	   	   	
 	} catch (JAXBException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
