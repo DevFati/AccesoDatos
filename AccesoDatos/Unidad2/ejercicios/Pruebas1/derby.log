@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Oct 10 17:12:39 CEST 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0192-76fd-3642-00000131e040 
+on database directory C:\Users\Tarde\eclipse-workspace\AccesoDatos\Unidad2\ejercicios\Pruebas1\basedatos\DERBY\ejemplo with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@b684286 
+Loaded from file:/C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/derby.jar
+java.vendor=Eclipse Adoptium
+java.runtime.version=21.0.3+9-LTS
+user.dir=C:\Users\Tarde\eclipse-workspace\AccesoDatos\Unidad2\ejercicios\Pruebas1
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
