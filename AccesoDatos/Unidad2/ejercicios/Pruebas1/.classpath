@@ -6,11 +6,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/derby.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/hsqldb.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/mysql-connector-java-5.1.49.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/ojdbc8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/sqlite-jdbc-3.46.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tarde/eclipse-workspace/AccesoDatos/Unidad2/conectores/mysql-connector-java-8.0.30.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fatmo/OneDrive/Documentos/2024-2025/AccesoDatos/AccesoDatos/Unidad2/conectores/derby.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fatmo/OneDrive/Documentos/2024-2025/AccesoDatos/AccesoDatos/Unidad2/conectores/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fatmo/OneDrive/Documentos/2024-2025/AccesoDatos/AccesoDatos/Unidad2/conectores/mysql-connector-java-5.1.49.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fatmo/OneDrive/Documentos/2024-2025/AccesoDatos/AccesoDatos/Unidad2/conectores/mysql-connector-java-8.0.30.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fatmo/OneDrive/Documentos/2024-2025/AccesoDatos/AccesoDatos/Unidad2/conectores/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fatmo/OneDrive/Documentos/2024-2025/AccesoDatos/AccesoDatos/Unidad2/conectores/sqlite-jdbc-3.46.1.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
