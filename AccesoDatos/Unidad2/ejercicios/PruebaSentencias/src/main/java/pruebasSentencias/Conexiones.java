@@ -11,10 +11,12 @@ public class Conexiones {
 
 		} catch (ClassNotFoundException  e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("ERROR DRIVER: "+e.getMessage());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("ERROR SQL EXCEPTION "+e.getMessage());
 		}
 		return conexion; 
 		
