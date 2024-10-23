@@ -6,18 +6,21 @@ package pruebasSentencias;
 
 import java.sql.*;
 
+import com.mysql.cj.protocol.Resultset;
+
 
 
 public class Principal {
 	
 	public static void main(String[] args) throws SQLException {
-		//Connection conexion=Conexiones.getOracle("ejemplo", "dam");
+	//	Connection conexion=Conexiones.getOracle("ejemplo", "dam");
 
-				Connection conexion=Conexiones.getMysql("ejemplo", "root","1234");
+			Connection conexion=Conexiones.getMysql("ejemplo", "root","1234");
 		//		Connection conexion=Conexiones.getSQLite(".\\basedatos\\SQLITE\\ejemplo.db");
 				
 				if(conexion!=null) {
 					actividad2_11(conexion,10); //si existe con empleados
+					System.out.println("");
 					actividad2_11(conexion,99); //dep no existe
 					actividad2_11(conexion,40); //existe sin empleados
 
@@ -28,43 +31,84 @@ public class Principal {
 
 				}
 	}
-	private static void actividad2_11(Connection conexion, int dept_no) throws SQLException {
+
+	
+	private static void actividad2_11(Connection conexion, int dept_no)  {
 		// TODO Auto-generated method stub
-		String mensaje="";
-		 String sql="select count(*) ,dnombre from departamentos where dept_no="+dept_no;
-			Statement sentencia=conexion.createStatement();
-			ResultSet resul=sentencia.executeQuery(sql);
-			resul.next();
-			int  cuenta=resul.getInt(1);
-			if(cuenta==0) {
-				//departamento no existe
+		//comprobar que el dep existe 
+		String sql1="select dnombre from departamentos where dept_no= ?";
+		
+		try {
+			PreparedStatement sentencia;
+			sentencia=conexion.prepareStatement(sql1);
+			sentencia.setInt(1, dept_no);
+			ResultSet resul=sentencia.executeQuery();
+			if (resul.next()) {
+				String nombre=resul.getString(1);
+				System.out.println("EMPLEADOS DEL DEPARTAMENTO "+nombre);
 				
-				System.out.println("EL DEPARTAMENTO ("+dept_no+") NO EXISTE ");
+				String sql2=  "select apellido, salario, oficio from empleados  where dept_no = ?";
+				PreparedStatement sentencia2;
+				sentencia2=conexion.prepareStatement(sql2);
+				sentencia2.setInt(1, dept_no);
+				ResultSet resul2=sentencia2.executeQuery();
+				
+				if(resul2.next()) {
+				System.out.printf("%15s %10s %15s%n", "APELLIDO","SALARIO","OFICIO");
+				System.out.printf("%15s %10s %15s%n","-------------------","  ----------------  ","  ---------------");
+				 //recorre el resut set 
+				//definir contador y acumulador 
+				int cuen=0;
+				float suma=0.f;
+				do{
+					cuen=cuen+1;
+					suma=suma+resul2.getFloat(2);
+					System.out.printf("%15s %10s %15s%n", resul2.getString(1),resul2.getFloat(2),resul2.getString(3));
+
+				}while(resul2.next()) ;
+	
+				System.out.printf("%15s %10s %15s%n","-------------------","  ----------------  ","  ---------------");
+				// con select 
+				
+				String sql3="select avg(salario), count(emp_no) from empleados where dept_no= ?";
+				PreparedStatement sentencia3;
+				sentencia3=conexion.prepareStatement(sql3);
+				sentencia3.setInt(1, dept_no);
+				ResultSet resul3=sentencia3.executeQuery();
+				resul3.next();
+				
+				Float medi=resul3.getFloat(1);
+				int cuenta=resul3.getInt(2);
+				System.out.println("SALARIO MEDIO: "+medi);
+				System.out.println("NUMERO EMPLEADOS: "+cuenta);
+				
+				//con contadores 
+				float medi2=suma/cuen;
+				System.out.println("--SALARIO MEDIO: "+medi2);
+				System.out.println("--NUMERO EMPLEADOS: "+cuen);
+				sentencia2.close();
+				sentencia3.close();
+				resul2.close();
+				resul3.close();
+				}else {
+					System.out.println("DEPARTAMENTO SIN EMPLEADOS");
+				}
+				
+				
+				
 				
 			}else {
-				String nombre=resul.getString(2);
-				System.out.println("EMPLEADOS DEL DEPARTAMENTO: "+nombre);
-				
-				  sql="select count(EMP_NO) ,apellido,oficio, salario from empleados  where dept_no="+dept_no+" GROUP BY DEPT_NO,apellido,oficio, salario";
-					 sentencia=conexion.createStatement();
-					 resul=sentencia.executeQuery(sql);
-					resul.next();
-					  cuenta=resul.getInt(1);
-					if(cuenta==0) {
-						//departamento no tiene empleados
-						
-						System.out.println("EL DEPARTAMENTO ("+dept_no+") NO TIENE EMPLEADOS ");
-						
-					}else {
-						String apellido=resul.getString(2);
-						String oficio=resul.getString(3);
-						Float salario=resul.getFloat(4);
-						
-						System.out.printf("%s, %s, %s %n", "APELLIDO", "SALARIO", "OFICIO");
-
-					}
-				
+				System.out.println("DEPARTAMENTO NO EXISTE: "+dept_no);
 			}
+			sentencia.close();
+			resul.close();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 			
 	
 		
