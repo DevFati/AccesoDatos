@@ -1,6 +1,7 @@
 package ejercicioJardineria;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +25,11 @@ public class Principal {
 				
 				break;
 			case 2:
+				verpedidoscliente(2); //no existe
+				verpedidoscliente(6); // no tiene pedidos 
+				verpedidoscliente(4); //si tiene pedidos 
+				
+				
 				break;
 			case 3:
 				break;
@@ -45,6 +51,148 @@ public class Principal {
 
 		} while (operacion != 0);
 	}
+
+	
+
+	private static void verpedidoscliente(int codigocliente) {
+		String sql1="select nombrecliente,lineadireccion1 from clientes where codigocliente=?";
+
+		String sql2="select count(*) from pedidos where codigocliente=?";
+		
+		try {
+			PreparedStatement sentencia;
+			sentencia = conexion.prepareStatement(sql1);
+			sentencia.setInt(1, codigocliente);
+			ResultSet resul = sentencia.executeQuery();
+			if (resul.next()) {
+				//cliente existe 
+				PreparedStatement sentencia2;
+				sentencia2 = conexion.prepareStatement(sql2);
+				sentencia2.setInt(1, codigocliente);
+				ResultSet resul2 = sentencia2.executeQuery();
+				resul2.next();
+				//Visualizamos 
+				
+			System.out.println("COD-CLIENTE: "+codigocliente+"            NOMBRE: "+resul.getString(1));  
+				System.out.println("DIRECCIÓN1: "+resul.getString(2)+"    Número de pedidos: "+resul2.getInt(1));
+			
+				System.out.println("------------------------------------------------------------------------------------------------------ ");
+				if(resul2.getInt(1)>0) {
+					listarPedidosCliente(codigocliente);
+				}
+			} else {
+				//cliente no existe 
+				System.out.println("---------------------------------");
+				System.out.println("Codigo de cliente no existe: "+codigocliente);
+				System.out.println("---------------------------------");
+
+			}
+			resul.close();
+			sentencia.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+
+
+
+	private static void listarPedidosCliente(int codigocliente) {
+		String sql1="select codigopedido, fechapedido, estado from pedidos where codigocliente=? order by codigocliente";
+		try {
+			PreparedStatement sentencia;
+			sentencia = conexion.prepareStatement(sql1);
+			sentencia.setInt(1, codigocliente);
+			ResultSet resul = sentencia.executeQuery();
+			
+			float importemax=0;
+			int pedidomax=0;
+			Date fechamax=null;
+			String nombreMaximo="", codmax="";
+			int cantidadMaxima=0;
+			
+			
+			
+			while(resul.next()) {
+				
+				System.out.println("    COD-PEDIDO: "+resul.getInt(1)+"    FECHA PEDIDO: "+resul.getDate(2)+"    ESTADO DEL PEDIDO: "+resul.getString(3));
+				System.out.printf("      %9s %9s %-40s %10s %10s %10s %n",
+						"NUM-LINEA",  "COD-PROD","NOMBRE PRODUCTO","CANTIDAD","PREC-UNID","IMPORTE");
+				
+				System.out.printf("      %9s %9s %-40s %10s %10s %10s %n",
+						"---------",  "---------","---------------------------------------------","---------","---------","---------","---------");
+				
+				//detalle de pedido
+				
+				String sql2="select numerolinea, codigoproducto, nombre, cantidad, preciounidad, preciounidad*cantidad from detallepedidos join productos "
+						+ "using (codigoproducto) where codigopedido=? order by numerolinea ";
+				
+				int sumacantidad=0; 
+				float sumaprecio=0, sumaimporte=0;
+				
+				PreparedStatement sentencia2;
+				sentencia2 = conexion.prepareStatement(sql2);
+				sentencia2.setInt(1, resul.getInt(1));
+				ResultSet resul2 = sentencia2.executeQuery();
+				while(resul2.next()) {
+					System.out.printf("      %9s %9s %-40s %10s %10s %10s %n",
+							resul2.getInt(1),  resul2.getString(2),resul2.getString(3),resul2.getInt(4),resul2.getFloat(5),resul2.getFloat(6));
+					sumacantidad=sumacantidad+resul2.getInt(4);
+					sumaprecio=sumaprecio+resul2.getFloat(5);
+					sumaimporte=sumaimporte+resul2.getFloat(6);
+					
+					if(resul2.getInt(4)>cantidadMaxima) {
+						cantidadMaxima=resul2.getInt(4);
+						nombreMaximo=resul2.getString(3);
+						codmax=resul2.getString(2);
+					}
+					
+				}
+					
+					//totales por pedido 
+				System.out.printf("      %61s %10s %10s %10s %n",
+					    "TOTALES POR PEDIDO",sumacantidad,sumaprecio,sumaimporte);
+			System.out.println();
+					if(sumaimporte > importemax) {
+						pedidomax=resul.getInt(1);
+						fechamax=resul.getDate(2);
+						importemax=sumaimporte;
+					} 
+					
+				
+				
+				resul2.close();
+				sentencia2.close();
+				
+			} //fin pedidos
+			
+			System.out.printf("      %9s  %9s %-40s %10s %10s %10s %n",
+					"---------",  "---------","----------------------------------------","----------",
+					"----------","----------");
+			
+			System.out.println("COD de PEDIDO y FECHA PEDIDO CON TOTAL IMPORTE MÁXIMO: " + pedidomax + ", " + fechamax);
+			System.out.println("COD PRODUCTO y NOMBRE PRODUCTO, del producto más comprado: "+ codmax + ", " + nombreMaximo); 
+			System.out.println("-------------------------------------------------------------------");  
+
+			
+			
+			System.out.println();
+		
+			
+				
+			resul.close();
+			sentencia.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 
 	public static boolean comprobarEmple(Connection conexion, int id) {
 		boolean existe = false;
