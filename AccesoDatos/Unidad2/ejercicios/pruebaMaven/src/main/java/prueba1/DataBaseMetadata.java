@@ -9,18 +9,21 @@ public class DataBaseMetadata {
 
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		boolean salir = false;
+		boolean salir = false; 
 		try {
 			Connection conexion = null;
-			do {
+			do { 
 				menu();
 				int opcion = s.nextInt();
 				switch (opcion) {
 				case 1:
-					Class.forName("com.mysql.cj.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver"); //Cargar el driver MySQL
+					//Establecemos la conexion con la BD
 					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplo", "root", "1234");
 					// catalogo,esquema,patronDeTabla,tipos[]
+					//Llama a verMetadatos para mostrar información sobre la base de datos. 
 					verMetadatos(conexion, "ejemplo", null, null, null);
+					//Llama a verResulsetMetadata para mostrar metadatos de la consulta.
 					verResultSetMetadata(conexion);
 					conexion.close(); // Cerrar conexión
 					break;
@@ -86,37 +89,38 @@ public class DataBaseMetadata {
 	}
 
 	private static void verMetadatos(Connection conexion, String catalogo, String esquema, String patronDeTabla,
-			String tipos[]) {
-		try {
-			DatabaseMetaData dbmd = conexion.getMetaData();
-			ResultSet resul = null;
-			String nombre = dbmd.getDatabaseProductName();
-			String driver = dbmd.getDriverName();
-			String url = dbmd.getURL();
-			String usuario = dbmd.getUserName();
+			String tipos[]) { //Método para mostrar metadatos de la base de datos. 
+		try { //Bloque try para manejar excepciones. 
+			DatabaseMetaData dbmd = conexion.getMetaData(); //Obtiene los metadatos de la conexión.
+			ResultSet resul = null; //Inicializa un ResultSet para almacenar resultados.
+			String nombre = dbmd.getDatabaseProductName(); //Obtiene el nombre del producto de la base de datos.
+			String driver = dbmd.getDriverName(); //Obtiene el nombre del driver utilizado.
+			String url = dbmd.getURL(); //Obtiene la URL de conexión de la base de datos
+			String usuario = dbmd.getUserName(); //Obtiene el nombre de usuario utilizado para conectarse
 
+			//Muestra información sobre la base de datos.
 			System.out.println("INFORMACIÓN SOBRE LA BASE DE DATOS:");
 			System.out.println("===================================");
-			System.out.printf("Nombre : %s %n", nombre);
-			System.out.printf("Driver : %s %n", driver);
-			System.out.printf("URL    : %s %n", url);
-			System.out.printf("Usuario: %s %n", usuario);
-			System.out.printf("MajorVersion: %s %n", dbmd.getDatabaseMajorVersion());
+			System.out.printf("Nombre : %s %n", nombre); //Imprime el nombre de la base de datos.
+			System.out.printf("Driver : %s %n", driver); //Imprime el nombre del driver
+			System.out.printf("URL    : %s %n", url); //Imprime la URL de conexión
+			System.out.printf("Usuario: %s %n", usuario); //Imprime el nombre del usuario.
+			System.out.printf("MajorVersion: %s %n", dbmd.getDatabaseMajorVersion()); //Imprime la versión principal de la base de datos.
 
 			// Obtener información de las tablas y vistas que hay
-			resul = dbmd.getTables(catalogo, esquema, patronDeTabla, tipos);
-			System.out.println("INFORMACION getTables(): ");
+			resul = dbmd.getTables(catalogo, esquema, patronDeTabla, tipos);  //Recupera las tablas según los paramétros dados.
+			System.out.println("INFORMACION getTables(): "); //Título para la información de tablas.
 			System.out.println("===================================");
-			while (resul.next()) {
-				String catalogo2 = resul.getString(1);// columna 1
-				String esquema2 = resul.getString(2); // columna 2
-				String tabla = resul.getString(3); // columna 3
-				String tipo = resul.getString(4); // columna 4
+			while (resul.next()) { //Itera a través de los resultados.
+				String catalogo2 = resul.getString(1);// Obtiene el catálogo de la tabla.
+				String esquema2 = resul.getString(2); // Obtiene el esquema de la tabla.
+				String tabla = resul.getString(3); // Obtiene el nombre de la tabla.
+				String tipo = resul.getString(4); // Obtiene el tipo de la tabla (ejemplo: "TABLE","VIEW").
 				// String ref=resul.getString(9); //columna 9
-				System.out.printf("%s - Catalogo: %s, Esquema: %s,Nombre: %s %n", tipo, catalogo2, esquema2, tabla);
+				System.out.printf("%s - Catalogo: %s, Esquema: %s,Nombre: %s %n", tipo, catalogo2, esquema2, tabla); //Imprime la información de la tabla.
 
 				// MOSTRAR COLUMNAS DE LA TABLA
-				System.out.println("    COLUMNAS TABLA " + tabla + ": ");
+				System.out.println("    COLUMNAS TABLA " + tabla + ": "); //Título para las columnas.
 				System.out.println("    ===================================");
 				ResultSet columnas = dbmd.getColumns(catalogo, esquema, tabla, null);
 				while (columnas.next()) {
