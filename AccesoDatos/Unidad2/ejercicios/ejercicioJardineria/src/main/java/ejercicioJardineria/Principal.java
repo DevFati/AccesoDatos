@@ -32,10 +32,13 @@ public class Principal {
 				
 				break;
 			case 3:
+				crearclientessinpedido();
 				break;
 			case 4:
+				clientesporempleado();
 				break;
 			case 5:
+				stockactualizado();
 				break;
 			case 6:
 				break;
@@ -53,6 +56,158 @@ public class Principal {
 	}
 
 	
+
+	private static void stockactualizado() {
+		String crearcolumna="ALTER TABLE productos ADD STOCKACTUALIZADO number(5)";
+		String actualiza="update productos p set STOCKACTUALIZADO = "
+				+ "CANTIDADENSTOCK - (select coalesce(sum(cantidad),0) from detallepedidos where codigoproducto = p.codigoproducto)";
+		String consulta="select codigoproducto, cantidadenstock , STOCKACTUALIZADO "
+				+ " from productos where STOCKACTUALIZADO< 5 ";
+		
+		try {
+			PreparedStatement sent = conexion.prepareStatement(crearcolumna);
+			sent.executeUpdate();
+			System.out.println("---------------------------------");
+			System.out.println("Columna creada."); 
+			sent.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Atención ya existe la columna.");
+			//System.out.println(e.getMessage());
+			
+		}
+		
+		try {
+			PreparedStatement sent = conexion.prepareStatement(actualiza);
+			int lin = 	sent.executeUpdate();
+			System.out.println("Columnas actualizadas, reg: "+ lin); 
+			sent.close();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.out.println("Atención error en la actualización: ");
+				System.out.println(e.getMessage());
+				
+			}
+	
+		try {
+			// LISTADO
+			PreparedStatement sent = conexion.prepareStatement(consulta);
+			ResultSet res = sent.executeQuery();
+			System.out.printf("%15s %15s %16s%n","COD PRODUCTO","CANTIDADENSTOCK" , "STOCKACTUALIZADO"); 
+			System.out.printf("%15s %15s %16s%n","---------------","---------------" , "----------------"); 
+			while (res.next()){
+				System.out.printf("%15s %15s %16s%n",
+						res.getString(1),
+				        res.getInt(2), res.getInt(3)); 
+				
+			}
+			
+			sent.close();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.out.println("Atención error en la actualización: ");
+				System.out.println(e.getMessage());
+				
+			}
+		
+		
+	}
+
+
+
+	private static void clientesporempleado() {
+		String crearcolumna="ALTER TABLE empleados ADD NUMCLIENTES number(5)";
+		String actualiza="update empleados emple set NUMCLIENTES = "
+				+ " ( select count(*) from clientes where codigoempleadorepventas = emple.codigoempleado)";
+
+		try {
+			PreparedStatement sent = conexion.prepareStatement(crearcolumna);
+			sent.executeUpdate();
+			System.out.println("---------------------------------");
+			System.out.println("Columna creada."); 
+			
+			sent.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Atención ya existe la columna: ");
+			System.out.println(e.getMessage());
+			
+		}
+			
+		try {
+			PreparedStatement sent = conexion.prepareStatement(actualiza);
+			int lin = 	sent.executeUpdate();
+			System.out.println("Columna actualizada, reg: "+ lin); 
+			
+			sent.close();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.out.println("Atención error en la actualización: ");
+				System.out.println(e.getMessage());
+				
+			}
+	
+	}
+
+
+
+	private static void crearclientessinpedido() {
+		// crear tabla sin pedidos y con los clientes
+				// create table clientessinpedido as
+				// select * from clientes where codigocliente 
+				//  not in ( select codigocliente  from pedidos );
+				 
+				 //Añadir la PK a la tabla
+				 // ALTER TABLE clientessinpedido ADD CONSTRAINT AAA_PK PRIMARY KEY ( CODIGOCLIENTE );
+
+				//borrar de clientes
+				//delete from clientes where codigocliente 
+				//not in ( select codigocliente  from pedidos );
+				String crear=" create table clientessinpedido as select * from clientes where codigocliente " +
+				" not in ( select codigocliente  from pedidos ) order by codigocliente";
+				
+				String alter="ALTER TABLE clientessinpedido ADD CONSTRAINT CSP_PK PRIMARY KEY ( CODIGOCLIENTE )";
+				
+				String borrar=" delete from clientes where codigocliente not in ( select codigocliente  from pedidos )";
+			
+				try {
+					PreparedStatement sent = conexion.prepareStatement(crear);
+					sent.executeUpdate();
+					System.out.println("---------------------------------");  
+					System.out.println("Tabla clientessinpedido creada con los registros");
+				    // añadimos la PK
+					sent = conexion.prepareStatement(alter);
+					sent.executeUpdate();
+					System.out.println("Añadida la PK en clientessinpedido");
+					
+					// borrar esos clientes
+					sent = conexion.prepareStatement(borrar);
+					int l=sent.executeUpdate();
+					System.out.println("Clientes sin pedido, borrados de clientes: "+l);
+					
+					sent.close();
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					System.out.println("Tabla CLIENTESSINPEDIDO ya creada, y clientes sin pedidos borrados de CLIENTES.");
+					//System.out.println(e.getMessage());
+					
+				}
+	}
+
+
 
 	private static void verpedidoscliente(int codigocliente) {
 		String sql1="select nombrecliente,lineadireccion1 from clientes where codigocliente=?";
