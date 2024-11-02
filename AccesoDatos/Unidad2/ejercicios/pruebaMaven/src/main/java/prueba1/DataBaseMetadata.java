@@ -91,7 +91,7 @@ public class DataBaseMetadata {
 	private static void verMetadatos(Connection conexion, String catalogo, String esquema, String patronDeTabla,
 			String tipos[]) { //Método para mostrar metadatos de la base de datos. 
 		try { //Bloque try para manejar excepciones. 
-			DatabaseMetaData dbmd = conexion.getMetaData(); //Obtiene los metadatos de la conexión.
+			DatabaseMetaData dbmd = conexion.getMetaData(); //Obtiene los metadatos de la base de datos.
 			ResultSet resul = null; //Inicializa un ResultSet para almacenar resultados.
 			String nombre = dbmd.getDatabaseProductName(); //Obtiene el nombre del producto de la base de datos.
 			String driver = dbmd.getDriverName(); //Obtiene el nombre del driver utilizado.
@@ -173,22 +173,26 @@ public class DataBaseMetadata {
 
 	}
 
-	private static void verResultSetMetadata(Connection conexion) {
+	private static void verResultSetMetadata(Connection conexion) {		
 		try {
+			//Muestra la consulta que se va a ejecutar 
 			System.out.println("METADATOS DE LA CONSULTA: "+consulta);
 			System.out.println("===================================");
+			// Crea un objeto Statement para ejecutar la consulta
 			Statement sentencia = conexion.createStatement();
+			//Ejecuta la consulta y almacena el resultado en ResultSet. 
 			ResultSet rs = sentencia.executeQuery(consulta);
-
+			//Obtiene los metadatos del ResultSet
 			ResultSetMetaData rsmd = rs.getMetaData();
-
+			//Obtiene el numero de columanas en el resultado 
 			int nColumnas = rsmd.getColumnCount();
 			String nula;
 			System.out.printf("Número de columnas recuperadas: %d%n", nColumnas);
+			//Recorre cada columna
 			for (int i = 1; i <= nColumnas; i++) {
 				System.out.printf("Columna %d: %n ", i);
 				System.out.printf("  Nombre: %s %n   Tipo: %s %n ", rsmd.getColumnName(i), rsmd.getColumnTypeName(i));
-				if (rsmd.isNullable(i) == 0)
+				if (rsmd.isNullable(i) == 0) //Muestra nombre, tipo, tamaño y si es nula.
 					nula = "NO";
 				else
 					nula = "SI";
@@ -198,8 +202,8 @@ public class DataBaseMetadata {
 				System.out.printf("  Nombre de la tabla: %s %n", rsmd.getTableName(i));
 			} // for
 
-			sentencia.close();
-			rs.close();
+			sentencia.close(); //Cierra el Statement 
+			rs.close(); //Cierra el ResultSet
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

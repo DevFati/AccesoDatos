@@ -20,7 +20,7 @@ public class Principal {
 					// Mysql
 					System.out.println("Prueba Mysql!");
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplo", "root", "");
+					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejemplo", "root", "1234");
 					consultadepartamentos(conexion);
 					conexion.close();
 
