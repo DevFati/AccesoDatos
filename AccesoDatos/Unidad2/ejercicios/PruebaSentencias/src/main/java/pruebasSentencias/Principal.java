@@ -116,7 +116,7 @@ public class Principal {
 		
 		
 	}
-	public static void pruebasInsertar(String[] args) throws SQLException {
+	public static void pruebainsertaremple(String[] args) throws SQLException {
 	
 		
 		//Connection conexion=Conexiones.getOracle("ejemplo", "dam");
@@ -128,7 +128,7 @@ public class Principal {
 		if(conexion!=null) {
 			
 		
-		System.out.println("PRUEBA verempleados MYSQL");
+		System.out.println("PRUEBA insertarempleados MYSQL");
 		
 		//error en empleado, dir y dep 
 		System.out.println(insertarEmpleado(conexion,7369,"","",222,-1500,100,45));
@@ -206,7 +206,7 @@ public class Principal {
 				resul.next();
 				cuenta=resul.getInt(1);
 				if(cuenta==0) {
-					//director no existe
+					//departamento no existe
 					mensaje=mensaje+"EL NUM DE DEPARTAMENTO("+dept_no+") NO EXISTE EN LA TABLA DEPARTAMENTOS.\n";
 					error=1;
 				}
