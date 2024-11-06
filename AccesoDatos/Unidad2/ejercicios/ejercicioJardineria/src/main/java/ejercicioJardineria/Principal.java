@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Scanner;
 
+
+
 public class Principal {
 	private static Connection conexion = Conexiones.getOracle("jardineria", "dam");
 
