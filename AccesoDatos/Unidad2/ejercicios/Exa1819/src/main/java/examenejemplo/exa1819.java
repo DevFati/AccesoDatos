@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class exa1819 {
-	private static Connection conexion = Conexiones.getOracle("EX1819", "dam");
+	private static Connection conexion = Conexiones.getOracle("EXA1819", "dam");
 
 public static void main(String[] args) {
 	

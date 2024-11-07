@@ -252,3 +252,26 @@ where coddepart in (select coddepart from departamentos where codempre=1);
 
 update empresas set presupuesto=9500 where codempre=1;
 
+
+
+
+/*import java.util.Date;
+import java.sql.Date as SqlDate;
+import java.text.SimpleDateFormat;
+
+public class DateFormatExample {
+    public static void main(String[] args) {
+        // Crear una fecha java.util.Date
+        Date utilDate = new Date();
+        
+        // Convertir a java.sql.Date
+        SqlDate sqlDate = new SqlDate(utilDate.getTime());
+
+        // Cambiar el formato de salida
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = formatter.format(sqlDate);
+
+        System.out.println("Fecha con formato personalizado: " + formattedDate);
+    }
+}
+*/
