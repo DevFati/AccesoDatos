@@ -276,3 +276,27 @@ create table estadisticasciudades(
  
  
  
+ select codclien, nombre from clientes;
+ 
+ select count(*) from reservas where codclien=1;
+ 
+ select sum(precio) from viajes where codviaje in (select codviaje from reservas where codclien=1);
+ 
+ select sum(tasa) from paises where codpais in (select codpais from ciudades where ciudad in (select ciudaddestino from viajes where codviaje in  (select codviaje from reservas where codclien=1))); 
+ 
+MAX=0; 
+sTRING ="";
+NUMRESERVAS>MAX{
+MAX=NUMRESERVAS; 
+sTRING=RESUL.GET...(NOMBRE)
+}ELSE{
+sTRING=STRING+RESUL.GET..(NOMBRE)
+
+
+SELECT NUMPLAZA, CODVIAJE FROM RESERVAS WHERE NUMPLAZA=1 AND CODVIAJE = 2;
+
+SELECT PLAZASOFERTADAS-(PLAZASOCUPADAS) FROM VIAJES WHERE CODVIAJE=4;
+
+SELECT PLAZASOFERTADAS FROM VIAJES WHERE CODVIAJE=4;
+
+

@@ -26,10 +26,10 @@ private static void creaeestadisticaciudades() {
 			+ "	    numviajesdestino number(5),"
 			+ "	    numviajesprocedencia number(5)"
 			+ "  )";
-	
+	//RELLENA LA TABLA CON VALORES POR DEFECTO 
 	String sql2="insert into estadisticaciudades "
 			+ "select ciudad, nombre, 0 , 0 from ciudades join paises using(codpais) order by ciudad";
-	
+	//LOS ACTUALIZA A LOS VALORES REALES 
 	String sql3=" update estadisticaciudades es\r\n"
 			+ " set NUMVIAJESDESTINO=(select count(*) from viajes where ciudaddestino=es.ciudad),\r\n"
 			+ " numviajesprocedencia=(   select count(*) from viajes where ciudadorigen=es.ciudad)";
@@ -111,7 +111,7 @@ private static void creaeestadisticaciudades2() {
 			respro.next();
 			int contpro = respro.getInt(1);
 			
-			//contador origen
+			//INSERTAR
 			sent2 = conexion.prepareStatement(insert);
 			sent2.setString(1,res.getString(1));
 			sent2.setString(2,res.getString(2));

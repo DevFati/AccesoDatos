@@ -208,3 +208,47 @@ select count(*) from departamentos where codempre=1;
 select nombre from empleados where codemple=11;
 select count(*) from empleados where coddepart=11;
 select nombre from empleados where codemple=101;
+
+
+
+ create table empresassindepar as select * from empresas where codempre not in ( select codempre  from departamentos ) order by codempre;
+ALTER TABLE empresassindepar ADD CONSTRAINT CSP_PK PRIMARY KEY ( codempre );
+
+delete from empresas where codempre not in ( select codempre from departamentos );
+
+update oficios ofi set numemple = 
+ ( select count(*) from empleados where codoficio = ofi.codoficio);
+ 
+ select max(codemple+1) from empleados;
+ 
+ select codjefedepartamento from departamentos where coddepart=11;
+ 
+ select * from oficios where codoficio=110;
+ 
+select codjefedepartamento from departamentos where coddepart=180;
+
+select codjefedepartamento from departamentos where coddepart=43;
+
+select codoficio, nombre, salariomes, preciotrienio from oficios;
+
+select count(*) from empleados where codoficio=588;
+
+select * from empleados where codemple=101;
+
+select * from empresas where codempre=155;
+
+select coddepart, nombre, direccion, localidad, codjefedepartamento, codempre from departamentos where coddepart= 255;
+
+update empleados set nombre=?,  apellido1=?,
+                			+ "  apellido2=?, extension=?,  email=?,   "
+                			+ "codigooficina = ?,  codigojefe = ?, puesto = ?"
+                			+ " where codigoempleado = ?";
+                            
+                            
+select count(*) from empleados where coddepart in (select coddepart from departamentos where codempre=1);
+
+select sum(salariomes) from empleados join oficios using (codoficio)
+where coddepart in (select coddepart from departamentos where codempre=1);
+
+update empresas set presupuesto=9500 where codempre=1;
+
