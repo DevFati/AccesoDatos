@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">dam</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">EJEMPLO</property>
+        <property name="hibernate.default_schema">EJEMPLO</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="hibernate.hbm2ddl.auto">none</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="clases/Departamentos.hbm.xml"/>
+        <mapping resource="clases/Empleados.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
