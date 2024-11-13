@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 13 nov 2024, 18:51:31 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Compras" optimistic-lock="none" table="COMPRAS">
+        <id name="numcompra" type="big_integer">
+            <column name="NUMCOMPRA" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.Clientes" fetch="select" name="clientes">
+            <column name="CODCLIENTE" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column length="7" name="FECHA"/>
+        </property>
+        <property name="descuento" type="big_integer">
+            <column name="DESCUENTO" precision="22" scale="0"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="detcomprases" table="DETCOMPRAS">
+            <key>
+                <column name="NUMCOMPRA" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Detcompras"/>
+        </set>
+    </class>
+</hibernate-mapping>

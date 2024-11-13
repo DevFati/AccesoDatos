@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 11 nov 2024, 18:48:22 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13 nov 2024, 18:50:56 by Hibernate Tools 5.5.9.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="clases.C1Profesores" optimistic-lock="none" table="C1_PROFESORES">
         <id name="codProf" type="short">
@@ -24,7 +24,7 @@
         <property name="sexo" type="java.lang.Character">
             <column length="1" name="SEXO"/>
         </property>
-        <set fetch="select" inverse="false" lazy="true" name="c1Asignaturases" schema="CENTROS" table="C1_ASIGPROF">
+        <set fetch="select" inverse="false" lazy="true" name="c1Asignaturases" table="C1_ASIGPROF">
             <key>
                 <column name="C1_PROFESORES_COD_PROF" not-null="true" precision="4" scale="0"/>
             </key>

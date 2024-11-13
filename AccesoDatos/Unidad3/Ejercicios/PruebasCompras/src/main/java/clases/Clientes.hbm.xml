@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 13 nov 2024, 18:51:31 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Clientes" optimistic-lock="none" table="CLIENTES">
+        <id name="codcliente" type="big_integer">
+            <column name="CODCLIENTE" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="25" name="NOMBRE"/>
+        </property>
+        <property name="poblacion" type="string">
+            <column length="35" name="POBLACION"/>
+        </property>
+        <property name="tlf" type="string">
+            <column length="10" name="TLF"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="comprases" table="COMPRAS">
+            <key>
+                <column name="CODCLIENTE" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Compras"/>
+        </set>
+    </class>
+</hibernate-mapping>

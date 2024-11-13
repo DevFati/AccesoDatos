@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 13 nov 2024, 18:51:31 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Detcompras" optimistic-lock="none" table="DETCOMPRAS">
+        <composite-id class="clases.DetcomprasId" name="id">
+            <key-property name="codproducto" type="big_integer">
+                <column name="CODPRODUCTO" precision="22" scale="0"/>
+            </key-property>
+            <key-property name="numcompra" type="big_integer">
+                <column name="NUMCOMPRA" precision="22" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="clases.Productos" fetch="select" insert="false" name="productos" update="false">
+            <column name="CODPRODUCTO" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.Compras" fetch="select" insert="false" name="compras" update="false">
+            <column name="NUMCOMPRA" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="unidades" type="big_integer">
+            <column name="UNIDADES" precision="22" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

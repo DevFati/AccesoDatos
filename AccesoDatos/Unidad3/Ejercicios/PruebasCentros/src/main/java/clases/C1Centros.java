@@ -1,5 +1,5 @@
 package clases;
-// Generated 11 nov 2024, 18:48:22 by Hibernate Tools 6.5.1.Final
+// Generated 13 nov 2024, 18:50:56 by Hibernate Tools 5.5.9.Final
 
 import java.util.HashSet;
 import java.util.Set;
