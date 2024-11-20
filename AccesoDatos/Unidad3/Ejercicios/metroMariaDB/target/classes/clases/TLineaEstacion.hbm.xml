@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 18 nov 2024, 16:27:41 by Hibernate Tools 5.6.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.TLineaEstacion" optimistic-lock="none" table="t_linea_estacion">
+        <composite-id class="clases.TLineaEstacionId" name="id">
+            <key-property name="codLinea" type="int">
+                <column name="cod_linea"/>
+            </key-property>
+            <key-property name="codEstacion" type="int">
+                <column name="cod_estacion"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="clases.TEstaciones" fetch="select" insert="false" name="TEstaciones" update="false">
+            <column name="cod_estacion" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="clases.TLineas" fetch="select" insert="false" name="TLineas" update="false">
+            <column name="cod_linea" not-null="true"/>
+        </many-to-one>
+        <property name="orden" type="int">
+            <column name="orden" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

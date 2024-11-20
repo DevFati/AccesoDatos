@@ -9,10 +9,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import clases.*;
-
 public class Principal {
 
 	private static SessionFactory factori;
+
 	public static void main(String[] args) {
 		LogManager.getLogManager().reset();
 		Logger globalLogger = Logger.getLogger(java.util.logging.Logger.GLOBAL_LOGGER_NAME);
@@ -29,11 +29,80 @@ public class Principal {
 		cargardeparget(100);
 		
 		cargardeparget(61);
-
+		System.out.println("-----------empleado no existe");
+		actualizardepalempleado(1111, 10); //empleado no existe
+		System.out.println("-----------dep no existe");
+		actualizardepalempleado(4450, 99); //dept no existe
+		System.out.println("-----------ok");
+		actualizardepalempleado(4450, 30); //correcta
+		
+		
+		System.out.println("-----------Añadir al set de empleados");
+		System.out.println("-----------error dep ");
+		insertaempleadoalsetdedepartamento( 999, 4455) ;
+		System.out.println("-----------error emple ");
+		insertaempleadoalsetdedepartamento( 30, 445599) ;
+		
+		System.out.println("-----------OK ");
+		insertaempleadoalsetdedepartamento( 30, 4455) ;
+		
 		factori.close();
 
 	}
 
+	
+	private static void insertaempleadoalsetdedepartamento(int nu, int emp) {
+		Session session = factori.openSession();
+
+		Departamentos dep = (Departamentos) session.get(Departamentos.class, nu);
+		if (dep == null) {
+			System.out.println("El departamento no existe. No se puede insertar empleado: "+nu);
+		} else {
+			// compruebo empleado
+			Empleados emple = (Empleados) session.get(Empleados.class, BigInteger.valueOf(emp));
+			if (emple == null) {
+				System.out.println("El Empleado no existe. No se puede insertar: "+ emp);
+			} else {
+				// lo añado al set
+				Transaction tx = session.beginTransaction();
+				dep.getEmpleadoses().add(emple);
+				System.out.println("Empleado " + emp + " añadido al departamento " + nu);
+				//session.update(dep);     
+				session.merge(dep);    
+				tx.commit();
+			}
+		}
+		session.close();
+
+	}
+
+	
+	private static void actualizardepalempleado(int emp, int nu ) {
+		
+		Session session = factori.openSession();
+		Empleados emple = (Empleados) session.get(Empleados.class, emp);
+		if (emple == null) {
+			System.out.println("El Empleado no existe. No se puede actualizar: "+emp);
+		} else {
+			Departamentos dep = (Departamentos) session.get(Departamentos.class, nu);
+			if (dep == null) 
+				System.out.println("El departamento no existe. No se puede actualizar: "+nu);
+				else {
+					Transaction tx = session.beginTransaction();
+					emple.setDepartamentos(dep);
+					System.out.println("Empleado " + emp + " actualizado al departamento " + nu);
+					// en desuso session.update(emple);
+					session.merge(emple);
+					tx.commit();
+					}
+			}
+			session.close();
+		}
+
+
+	
+	
+	
 	private static void cargardeparget(int nu) {
 		Session session = factori.openSession();
 		Departamentos dep = (Departamentos) session.get(Departamentos.class, nu);
@@ -44,6 +113,7 @@ public class Principal {
 			System.out.println("Localidad:" + dep.getLoc());
 			
 			Set<Empleados> listaemple = dep.getEmpleadoses();
+			
 			System.out.println("Número de empleados: " + listaemple.size());
 			
 			for (Empleados emple : listaemple) {

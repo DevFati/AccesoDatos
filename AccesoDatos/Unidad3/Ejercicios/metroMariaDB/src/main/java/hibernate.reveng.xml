@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="metro" match-name="t_accesos"/>
+  <table-filter match-catalog="metro" match-name="t_cocheras"/>
+  <table-filter match-catalog="metro" match-name="t_estaciones"/>
+  <table-filter match-catalog="metro" match-name="t_linea_estacion"/>
+  <table-filter match-catalog="metro" match-name="t_lineas"/>
+  <table-filter match-catalog="metro" match-name="t_trenes"/>
+</hibernate-reverse-engineering>

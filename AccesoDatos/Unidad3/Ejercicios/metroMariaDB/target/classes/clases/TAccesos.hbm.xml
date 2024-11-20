@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 18 nov 2024, 16:27:41 by Hibernate Tools 5.6.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.TAccesos" optimistic-lock="none" table="t_accesos">
+        <id name="codAcceso" type="int">
+            <column name="cod_acceso"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.TEstaciones" fetch="select" name="TEstaciones">
+            <column name="cod_estacion" not-null="true"/>
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column length="50" name="descripcion" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

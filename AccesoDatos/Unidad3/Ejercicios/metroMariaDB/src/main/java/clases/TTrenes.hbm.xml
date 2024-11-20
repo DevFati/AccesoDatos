@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 18 nov 2024, 16:27:41 by Hibernate Tools 5.6.15.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.TTrenes" optimistic-lock="none" table="t_trenes">
+        <id name="codTren" type="int">
+            <column name="cod_tren"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.TCocheras" fetch="select" name="TCocheras">
+            <column name="cod_cochera" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="clases.TLineas" fetch="select" name="TLineas">
+            <column name="cod_linea" not-null="true"/>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column length="50" name="nombre" not-null="true"/>
+        </property>
+        <property name="tipo" type="string">
+            <column length="20" name="tipo" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
