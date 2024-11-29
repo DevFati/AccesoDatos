@@ -14,6 +14,7 @@ import org.hibernate.query.Query;
 
 import clases.*;
 
+
 public class Principal {
 	private static SessionFactory factori;
 
@@ -24,31 +25,83 @@ public class Principal {
 
 		factori = Conexion.getSession(); // Creo la sessionFactory una única vez.
 
-		System.out.println("-----Estacion existe");
-		veraccesosestacion(2);
-
-		System.out.println("-----Estacion sin accesos");
-		veraccesosestacion(21);
-
-		System.out.println("-----Estacion no existe");
-		veraccesosestacion(210);
-
-		// Lista de parámetros
-		List<String> tipos = new ArrayList<String>();
-		tipos.add("SERIE 3000");
-		tipos.add("SERIE 8400");
-
-		vertrenesportipo(tipos);
+		listarlineasestacionesaccesos();
 		
-		tipos = new ArrayList<String>();
-		tipos.add("SERIE 5000");
-		tipos.add("SERIE 9000");
-		tipos.add("SERIE 8000");
 		
-		vertrenesportipo(tipos);
+//		System.out.println("-----Estacion existe");
+//		veraccesosestacion(2);
+//
+//		System.out.println("-----Estacion sin accesos");
+//		veraccesosestacion(21);
+//
+//		System.out.println("-----Estacion no existe");
+//		veraccesosestacion(210);
+//
+//		// Lista de parámetros
+//		List<String> tipos = new ArrayList<String>();
+//		tipos.add("SERIE 3000");
+//		tipos.add("SERIE 8400");
+//
+//		vertrenesportipo(tipos);
+//		
+//		tipos = new ArrayList<String>();
+//		tipos.add("SERIE 5000");
+//		tipos.add("SERIE 9000");
+//		tipos.add("SERIE 8000");
+//		
+//		vertrenesportipo(tipos);
 		
 		factori.close();
 
+	}
+
+	private static void listarlineasestacionesaccesos() {
+		Session session = factori.openSession();
+		String con = "from TLineas l join l.TLineaEstacions lt join lt.TEstaciones.TAccesoses ta order by l.codLinea";
+		
+		Query q = session.createQuery(con, Object.class);
+		List<Object[]> lista = q.list();
+		
+		System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n",
+               "CODLIN","NOMBRELIN", "CODEST","NOMBREESTACION","CODACC","DESCR.ACCESO");
+		System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n",
+	               "------","------------------------------", "------","------------------------------",
+	               "------","------------------------------");
+		
+		
+		for (int i = 1; i < lista.size(); i++) {
+			Object[] par = (Object[]) lista.get(i);
+			TLineas lin = (TLineas) par[0]; // objeto empleado el primero
+			TLineaEstacion liest = (TLineaEstacion) par[1];
+			
+			//TEstaciones  acc= (TEstaciones) par[2];
+			
+			TAccesos acc = (TAccesos) par[3];
+			
+			System.out.printf("%6s %-30s %6s %-30s %6s %-30s%n",
+					lin.getCodLinea(), lin.getNombre(),
+					liest.getTEstaciones().getCodEstacion(),
+					liest.getTEstaciones().getNombre(),
+					//acc.getCodEstacion(), acc.getNombre()
+			        acc.getCodAcceso(), acc.getDescripcion()
+					);
+		}
+		
+		
+		System.out.println();	System.out.println();
+		
+		for (Object linaes : lista) {
+			
+			Object[] par = (Object[]) linaes;
+			TLineas lin = (TLineas) par[0]; 
+			TLineaEstacion liest = (TLineaEstacion) par[1];
+			//TAccesos  acc= (TAccesos) par[2];
+			
+			System.out.println("linaes "+ linaes.toString());
+				
+		}
+		
+		session.close();
 	}
 
 	private static void vertrenesportipo(List<String> tipos) {

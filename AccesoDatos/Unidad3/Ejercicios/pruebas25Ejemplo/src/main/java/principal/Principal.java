@@ -1,5 +1,6 @@
 package principal;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -7,13 +8,31 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import clases.*;
+
+
 public class Principal {
 
 	private static SessionFactory factori;
 
+	
 	public static void main(String[] args) {
+		LogManager.getLogManager().reset();
+		Logger globalLogger = Logger.getLogger(java.util.logging.Logger.GLOBAL_LOGGER_NAME);
+		globalLogger.setLevel(java.util.logging.Level.OFF);
+
+
+
+		factori = Conexion.getSession(); // Creo
+		
+		consultasobjetos();
+		
+		factori.close();
+	}
+	
+	public static void main2(String[] args) {
 		LogManager.getLogManager().reset();
 		Logger globalLogger = Logger.getLogger(java.util.logging.Logger.GLOBAL_LOGGER_NAME);
 		globalLogger.setLevel(java.util.logging.Level.OFF);
@@ -49,6 +68,25 @@ public class Principal {
 		factori.close();
 
 	}
+
+	private static void consultasobjetos() {
+		Session session = factori.openSession();
+		String hql="from Empleados e, Departamentos d where  e.departamentos.deptNo=d.deptNo order by e.apellido";
+		Query cons = session.createQuery(hql, Object.class);
+		List datos = cons.list();
+		
+		for (int i = 1; i < datos.size(); i++) {
+			Object[] par = (Object[]) datos.get(i);
+			Empleados em = (Empleados) par[0]; // objeto empleado el primero
+			Departamentos de = (Departamentos) par[1]; // objeto departamento el segundo
+			System.out.println(em.getApellido() + 
+					"*" + em.getSalario() + "*" + 
+	                  de.getDnombre() + "*" + de.getLoc());
+		}
+		session.close();
+		
+	}
+
 
 	
 	private static void insertaempleadoalsetdedepartamento(int nu, int emp) {
