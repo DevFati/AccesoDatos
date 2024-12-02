@@ -26,6 +26,8 @@ public class Principal {
 		factori = Conexion.getSession(); // Creo la sessionFactory una única vez.
 
 		listarlineasestacionesaccesos();
+		veraccesosporestacion();
+		numTrenesxtipo();
 		
 		
 //		System.out.println("-----Estacion existe");
@@ -53,6 +55,115 @@ public class Principal {
 		
 		factori.close();
 
+	}
+
+	private static void numTrenesxtipo() {
+		/*    • Hacer un método java que visualice el número de trenes de cada tipo, y el tipo con más trenes. La salida ordenada por tipo
+TIPO   Número de trenes
+-----  ----------------  
+. . .  . . . . . . .
+-----  ----------------  
+Tipo o tipos con más trenes: . . . .
+Media de trenes por Tipo: . . . . .
+*/
+		Session session = factori.openSession();
+		String con="select count(t), t.tipo from TTrenes t\r\n"
+				+ "group by t.tipo";
+		Query q = session.createQuery(con,Object.class);
+		List<Object[]> lista=q.list();
+		
+		System.out.printf("%-30s %-30s %n",
+	               "TIPO","NÚMERO DE TRENES");
+		
+		System.out.printf("%-30s %-30s %n",
+	               "------------------------------","------------------------------");
+		//Media de trenes por tipo 
+		//Maxima serie con trenes 
+		int contador=0; 
+		float suma=0; 
+		long max=0; 
+		String maxS="";
+		for (int i = 0; i < lista.size(); i++) {
+			Object[] par = (Object[]) lista.get(i);
+			Long num=(Long) par[0];
+			String tip=(String) par[1];
+	
+			suma=suma+num;
+			contador++;
+			System.out.printf("%-30s %-30s %n",
+		              tip,num);
+			if(num>=max) {
+				if(num==max) {
+					maxS=maxS+tip+". ";
+				
+			}else {
+				max=num;
+				maxS=tip+". ";
+			}
+			}
+			
+		}
+	
+		float media=suma/contador; 
+		System.out.println("Media de trenes por tipo: "+media);
+		System.out.println("Nombre de tipo de trenes con mas trenes: "+maxS);
+		System.out.println("Con un número de trenes máximo de: "+max);
+		session.close();
+		
+		
+	}
+
+	private static void veraccesosporestacion() {
+		Session session = factori.openSession();
+		//Accesosporestacion
+		String con = "select new clases.Accesosporestacion(e.codEstacion, e.nombre, e.direccion, count(a) ) "
+				+ "   from TEstaciones e left join e.TAccesoses a"
+				+ "   group by e.codEstacion, e.nombre, e.direccion"
+				+ "   order by  e.codEstacion";
+			
+		Query q = session.createQuery(con, Accesosporestacion.class);
+		List<Accesosporestacion> lista = q.list();
+		//Cod_estación  Nombre  Dirección  Número de accesos
+		System.out.printf("%6s %-30s %-30s %6s %n",
+	               "CODEST","NOMBRE", "DIRECCIÓN","NUMACC");
+			System.out.printf("%6s %-30s %-30s %6s %n",
+		               "------","------------------------------", "------------------------------",
+		               "------");
+		String nombremax="";
+		Long max=0l;
+		int contador=0; 
+		Float suma=0f; 
+		for (Accesosporestacion acc:lista) {
+			//System.out.println(acc.toString());
+			System.out.printf("%6s %-30s %-30s %6s %n",
+					acc.getCodEstacion(), acc.getNombre(),
+					acc.getDireccion(), acc.getContador());
+			if(acc.getContador()>=max) {
+				if(acc.getContador()==max) {
+					nombremax=nombremax+acc.getNombre()+". ";
+				
+			}else {
+				max=acc.getContador();
+				nombremax=acc.getNombre()+". ";
+			}
+			}
+			contador ++;
+			suma=suma+acc.getContador();
+		} 
+		System.out.printf("%6s %-30s %-30s %6s %n",
+	               "------","------------------------------", "------------------------------",
+	               "------");
+		
+		
+		System.out.println("Nombre de estación con mas accesos: "+nombremax);
+		System.out.println("Media de accesos por estación: "+suma/contador);
+		
+		
+		
+		
+		session.close();
+		
+		
 	}
 
 	private static void listarlineasestacionesaccesos() {

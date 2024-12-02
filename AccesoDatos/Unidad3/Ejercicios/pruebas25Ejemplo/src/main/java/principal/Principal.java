@@ -29,6 +29,9 @@ public class Principal {
 		
 		consultasobjetos();
 		
+		consultatotales();
+		consultaconobjetos();
+		
 		factori.close();
 	}
 	
@@ -68,6 +71,27 @@ public class Principal {
 		factori.close();
 
 	}
+	
+	
+	private static void consultaconobjetos() {
+		Session session = factori.openSession();
+		Query cons = session.createQuery("select d.deptNo, count(em.empNo), "
+				+ " coalesce(avg(em.salario),0), "
+				+ " d.dnombre from Departamentos d left join d.empleadoses em  " 
+				+ " group by d.deptNo,d.dnombre order by d.deptNo", Object.class);
+		System.out.printf("%n%10s %-15s %14s %-14s", "NUMERO DEP", "NOMBRE", 
+	             "SALARIO MEDIO", "NUM EMPLES");
+		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------",
+	       "--------------", "--------------");
+
+		List filas = cons.list();
+		for (int i = 0; i < filas.size(); i++) {
+			Object[] filaActual = (Object[]) filas.get(i); // Acceso a una fila
+			System.out.printf("%n%10s %-15s %14.2f %-14s", filaActual[0], 
+	                filaActual[3], filaActual[2], filaActual[1]);
+		}
+	}
+
 
 	private static void consultasobjetos() {
 		Session session = factori.openSession();
@@ -85,6 +109,32 @@ public class Principal {
 		}
 		session.close();
 		
+	}
+	
+	private static void consultatotales() {
+		Session session = factori.openSession();
+
+		Query cons4 = session.createQuery("select new clases.Totales("
+			+ " d.deptNo, count(em.empNo),  "
+			+ " coalesce(avg(em.salario),0), d.dnombre )"
+			+ " from Departamentos d left join d.empleadoses em " 
+			+ " group by  d.deptNo,d.dnombre ", Totales.class);
+			
+		System.out.printf("%n%10s %-15s %14s %-14s", "NUMERO DEP", "NOMBRE",
+					"SALARIO MEDIO", "NUM EMPLES");
+		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------",
+					"--------------", "--------------");
+		
+		List<Totales> filas4 = cons4.list();
+		for (int i = 0; i < filas4.size(); i++) {
+			Totales tot = (Totales) filas4.get(i);
+			System.out.printf("%n%10s %-15s %14.2f %-14s",tot.getNumero(),
+	 tot.getNombre() ,tot.getMedia(),tot.getCuenta());
+		}
+		System.out.printf("%n%10s %-15s %14s %-14s", "----------", "---------------",
+					"--------------", "--------------");
+		
+		session.close();
 	}
 
 
