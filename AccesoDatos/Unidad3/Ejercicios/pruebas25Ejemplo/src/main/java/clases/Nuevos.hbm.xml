@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generated 9 dic 2024, 16:19:36 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="clases.Departamentos" optimistic-lock="none" table="DEPARTAMENTOS">
+    <class name="clases.Nuevos" optimistic-lock="none" table="NUEVOS">
         <id name="deptNo" type="big_integer">
             <column name="DEPT_NO" precision="22" scale="0"/>
             <generator class="assigned"/>
@@ -12,11 +12,5 @@
         <property name="loc" type="string">
             <column length="15" name="LOC"/>
         </property>
-        <set fetch="select" inverse="true" lazy="true" name="empleadoses" table="EMPLEADOS">
-            <key>
-                <column name="DEPT_NO" not-null="true" precision="22" scale="0"/>
-            </key>
-            <one-to-many class="clases.Empleados"/>
-        </set>
     </class>
 </hibernate-mapping>

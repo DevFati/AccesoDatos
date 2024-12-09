@@ -11,9 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-
 import clases.*;
-
 
 public class Principal {
 
@@ -27,28 +25,31 @@ public class Principal {
 
 		factory = Conexion.getSession(); // Creo la sessionFactory una única vez.
 
-	//	conuniqueresultmaxproductoporcompra();
+		// conuniqueresultmaxproductoporcompra();
 		// Utilizando la clase auxiliar
-	//	listartotalclientes1();
+		// listartotalclientes1();
 
 		// Consulta from Clientes
-	//	listartotalclientes2();
+		// listartotalclientes2();
 
 		// consulta con array d3 objetos
-	//	listartotalproductos1();
+		// listartotalproductos1();
 
-		
-		//actualizar stock de productos con menos de 70 unidades
-		
+		// actualizar stock de productos con menos de 70 unidades
+
 		actualizarstock();
-		
+		// no borra tiee reg relacionados
 		borrarcliente(1);
-		
+		// lo borra la 1ª vez, la seg no existe
+		borrarcliente(6);
+		// No exsite
+		borrarcliente(100);
+
 		// Consulta from productos
-		listartotalproductos2();
+		// listartotalproductos2();
 
 		// Detalles de productos
-		listardetalleproductos();
+		// listardetalleproductos();
 
 		factory.close();
 
@@ -59,44 +60,35 @@ public class Principal {
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {
-		String hqlDel = "delete Clientes c where c.codcliente = ?1";
-		int  filas=session.createMutationQuery( hqlDel )
-			              .setParameter( 1, cli )
-			              .executeUpdate();
-		System.out.println("CLIENTE BORRADO: "+cli);	
-    	
-		tx.commit(); 
-		}catch(org.hibernate.exception.ConstraintViolationException e) {
+			String hqlDel = "delete Clientes c where c.codcliente = ?1";
+			int filas = session.createMutationQuery(hqlDel).setParameter(1, cli).executeUpdate();
+			if (filas != 0) {
+				System.out.println("CLIENTE BORRADO: " + cli);
+			} else {
+				System.out.println("CLIENTE NO EXISTE: " + cli);
+			}
+			tx.commit();
+
+		} catch (org.hibernate.exception.ConstraintViolationException e) {
 			System.out.println("Atención cliente " + cli + " no se puede borrar, tiene reg relacionados.");
-			
-			
+
 		}
-	
-		
+
 		session.close();
 
-		
-		
-		
-		
 	}
 
 	private static void actualizarstock() {
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
-		
 
-		String hqlModif = "update Productos p set p.stock = p.stock + :subida "
-				+ " where p.stock <=70 ";
-		int  filasModif=session.createMutationQuery( hqlModif)
-			              .setParameter( "subida", 50)
-			               .executeUpdate();
-		tx.commit(); 
-		System.out.println("FILAS MODIFICADAS: "+filasModif);	
+		String hqlModif = "update Productos p set p.stock = p.stock + :subida " + " where p.stock <=70 ";
+		int filasModif = session.createMutationQuery(hqlModif).setParameter("subida", 50).executeUpdate();
+		tx.commit();
+		System.out.println("FILAS MODIFICADAS: " + filasModif);
 
-		
 		session.close();
-		
+
 	}
 
 	private static void listardetalleproductos() {
@@ -110,56 +102,47 @@ public class Principal {
 			System.out.println("Cod producto: " + p.getCodproducto());
 			System.out.println("Denominación: " + p.getDenominacion() + "   Precio: " + p.getPvp());
 			System.out.println("Stock actual: " + p.getStock());
-			
+
 			System.out.println("-----------------------------------------------------------------------");
 
-		    if (p.getDetcomprases().size()==0) {
-		    	System.out.println("   ** SIN COMPRAS ** ");
-		    	System.out.println("-----------------------------------------------------------------------");
-		    }else {
-		    	
-		    	System.out.printf("%10s %10s %10s %-30s %10s %10s %n",
-		    			"Num_compra","FechaCompra","CodCliente","Nombre cliente",
-		    			"Unidades","Importe");
-		    	System.out.printf("%10s %10s %10s %-30s %10s %10s %n",
-		    			"----------","----------","----------","------------------------------",
-		    			"----------","----------");
-		    
-		    	//Set<Detcompras> detalle = p.getDetcomprases();
-		    	
-		    	// Para ordenar por número de compra hacer consulta
-		    	String hql3="from Detcompras d where d.productos.codproducto=:cod order by id.numcompra";
-		    	Query<Detcompras> q3 = session.createQuery(hql3, Detcompras.class);
+			if (p.getDetcomprases().size() == 0) {
+				System.out.println("   ** SIN COMPRAS ** ");
+				System.out.println("-----------------------------------------------------------------------");
+			} else {
+
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "Num_compra", "FechaCompra", "CodCliente",
+						"Nombre cliente", "Unidades", "Importe");
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "----------", "----------", "----------",
+						"------------------------------", "----------", "----------");
+
+				// Set<Detcompras> detalle = p.getDetcomprases();
+
+				// Para ordenar por número de compra hacer consulta
+				String hql3 = "from Detcompras d where d.productos.codproducto=:cod order by id.numcompra";
+				Query<Detcompras> q3 = session.createQuery(hql3, Detcompras.class);
 				q3.setParameter("cod", p.getCodproducto());
-				
-		    	List<Detcompras> detalle = q3.list();
-				
+
+				List<Detcompras> detalle = q3.list();
+
 				int sumauni = 0;
-				float timp=0;
-			   for (Detcompras de:detalle) {
-			   
-				   float imp = de.getUnidades().intValue() * p.getPvp().floatValue(); 
-				   timp=timp+imp;
-				   sumauni = sumauni + de.getUnidades().intValue();
-					System.out.printf("%10s %10s %10s %-30s %10s %10s %n",
-			        de.getCompras().getNumcompra(),
-			        de.getCompras().getFecha(),
-			        de.getCompras().getClientes().getCodcliente(),
-			        de.getCompras().getClientes().getNombre(),
-			        de.getUnidades(),imp);
-			        
-			   } //fin detalle
-			   System.out.printf("%10s %10s %10s %-30s %10s %10s %n",
-		    			"----------","----------","----------","------------------------------",
-		    			"----------","----------");
-			   System.out.printf("%10s %10s %10s %-30s %10s %10s %n",
-		    			"TOTALES: ","","","",
-		    			sumauni,timp);
-		    
-		      
-		    }//else prod con compras
-		
-		} //fin productos
+				float timp = 0;
+				for (Detcompras de : detalle) {
+
+					float imp = de.getUnidades().intValue() * p.getPvp().floatValue();
+					timp = timp + imp;
+					sumauni = sumauni + de.getUnidades().intValue();
+					System.out.printf("%10s %10s %10s %-30s %10s %10s %n", de.getCompras().getNumcompra(),
+							de.getCompras().getFecha(), de.getCompras().getClientes().getCodcliente(),
+							de.getCompras().getClientes().getNombre(), de.getUnidades(), imp);
+
+				} // fin detalle
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "----------", "----------", "----------",
+						"------------------------------", "----------", "----------");
+				System.out.printf("%10s %10s %10s %-30s %10s %10s %n", "TOTALES: ", "", "", "", sumauni, timp);
+
+			} // else prod con compras
+
+		} // fin productos
 
 		session.close();
 	}

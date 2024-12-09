@@ -12,6 +12,7 @@
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <mapping resource="clases/Departamentos.hbm.xml"/>
+        <mapping resource="clases/Nuevos.hbm.xml"/>
         <mapping resource="clases/Empleados.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
