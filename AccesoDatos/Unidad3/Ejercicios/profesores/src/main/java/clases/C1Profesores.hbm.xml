@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 7 dic 2024, 14:33:55 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.C1Profesores" optimistic-lock="none" table="C1_PROFESORES">
+        <id name="codProf" type="short">
+            <column name="COD_PROF" precision="4" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.C1Centros" fetch="select" name="c1Centros">
+            <column name="COD_CENTRO" precision="4" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.C1Especialidad" fetch="select" name="c1Especialidad">
+            <column length="2" name="ESPECIALIDAD"/>
+        </many-to-one>
+        <many-to-one class="clases.C1Profesores" fetch="select" name="c1Profesores">
+            <column name="COD_PROF1" precision="4" scale="0"/>
+        </many-to-one>
+        <property name="nombreApe" type="string">
+            <column length="30" name="NOMBRE_APE"/>
+        </property>
+        <property name="fechaNac" type="date">
+            <column length="7" name="FECHA_NAC"/>
+        </property>
+        <property name="sexo" type="java.lang.Character">
+            <column length="1" name="SEXO"/>
+        </property>
+        <set fetch="select" inverse="false" lazy="true" name="c1Asignaturases" table="C1_ASIGPROF">
+            <key>
+                <column name="C1_PROFESORES_COD_PROF" not-null="true" precision="4" scale="0"/>
+            </key>
+            <many-to-many entity-name="clases.C1Asignaturas">
+                <column length="6" name="C1_ASIGNATURAS_COD_ASIG" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="c1Profesoreses" table="C1_PROFESORES">
+            <key>
+                <column name="COD_PROF1" precision="4" scale="0"/>
+            </key>
+            <one-to-many class="clases.C1Profesores"/>
+        </set>
+    </class>
+</hibernate-mapping>

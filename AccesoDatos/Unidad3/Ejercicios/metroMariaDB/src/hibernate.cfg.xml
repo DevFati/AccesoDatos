@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mariadb://localhost:3306/metro</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.default_catalog">metro</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.hbm2ddl.auto">none</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="clases/TLineaEstacion.hbm.xml"/>
+        <mapping resource="clases/TAccesos.hbm.xml"/>
+        <mapping resource="clases/TLineas.hbm.xml"/>
+        <mapping resource="clases/TTrenes.hbm.xml"/>
+        <mapping resource="clases/TEstaciones.hbm.xml"/>
+        <mapping resource="clases/TCocheras.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

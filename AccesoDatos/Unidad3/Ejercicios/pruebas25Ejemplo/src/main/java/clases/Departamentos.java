@@ -1,5 +1,5 @@
 package clases;
-// Generated 9 dic 2024, 16:19:36 by Hibernate Tools 6.5.1.Final
+// Generated 11 nov 2024, 16:55:40 by Hibernate Tools 6.5.1.Final
 
 import java.math.BigInteger;
 import java.util.HashSet;

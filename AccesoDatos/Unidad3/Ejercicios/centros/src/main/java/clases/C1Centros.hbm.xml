@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 9 dic 2024, 0:06:31 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.C1Centros" optimistic-lock="none" table="C1_CENTROS">
+        <id name="codCentro" type="short">
+            <column name="COD_CENTRO" precision="4" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nomCentro" type="string">
+            <column length="20" name="NOM_CENTRO"/>
+        </property>
+        <property name="director" type="java.lang.Short">
+            <column name="DIRECTOR" precision="4" scale="0"/>
+        </property>
+        <property name="direccion" type="string">
+            <column length="25" name="DIRECCION"/>
+        </property>
+        <property name="localidad" type="string">
+            <column length="20" name="LOCALIDAD"/>
+        </property>
+        <property name="provincia" type="string">
+            <column length="20" name="PROVINCIA"/>
+        </property>
+        <set fetch="select" inverse="false" lazy="true" name="c1Profesoreses" table="C1_PROFESORES">
+            <key>
+                <column name="COD_CENTRO" precision="4" scale="0"/>
+            </key>
+            <one-to-many class="clases.C1Profesores"/>
+        </set>
+    </class>
+</hibernate-mapping>
