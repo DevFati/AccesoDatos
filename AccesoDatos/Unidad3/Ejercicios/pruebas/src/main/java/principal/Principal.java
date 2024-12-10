@@ -3,6 +3,7 @@ package principal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,9 +14,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import clases.Departamentos;
 import clases.Empleados;
+import jakarta.persistence.TypedQuery;
 import oracle.jdbc.driver.json.JakartaExceptionFactory;
 
 public class Principal {
@@ -59,7 +62,200 @@ public static void main(String[] args) {
 	//Borramos un departamento 
 	borrardepar(10);
 	
+	
+	
+	//listardepartamentos2 (usando getresultlist)
+	listardepartamentos2();
+	
+	//listar empleados de un dep 
+	
+	listaremplesdeundep(10);
+	
+	//listar departamentos 
+		System.out.println("LISTAMOS LOS DEPARTAMENTOS: ");
+		listardepartamentos();
+	
+		//listardepartamentos pero usando set de empleados en vez 
+		//de sacarlos con consulta
+		System.out.println("LISTAMOS LOS DEPARTAMENTOS SET: ");
+		listardepartamentosSet();
+
+		//Consulta uniqueResult cuando se devuelve un unico objeto 
+		//
+		System.out.println("USAMOS UNIQUE RESULT: ");
+		consultauniqueresul();
+	
 	sesion.close();
+	
+}
+
+private static void consultauniqueresul() {
+	
+	Session session = sesion.openSession();
+	//Visualiza los datos del departamento 10  
+	System.out.println("------------------------");
+	Departamentos depart = (Departamentos) session.createQuery(
+		    "from Departamentos as dep where dep.deptNo = 10").uniqueResult();
+	System.out.println(depart.getLoc() +"*"+depart.getDnombre());	
+
+	//Visualiza los datos del departamento con nombre CONTABILIDAD
+	System.out.println("------------------------");
+	depart = (Departamentos) session.createQuery("from Departamentos as dep where dep.dnombre = 'CONTABILIDAD'").uniqueResult();
+	System.out.println(depart.getLoc() +"*"+depart.getDeptNo());
+
+	System.out.println("------------------------");
+	Long cont =  (Long) session.createQuery("select count(*) from Empleados ").uniqueResult();
+	System.out.println("Número de empleados: " + cont);
+
+	System.out.println("------------------------");
+	Double media =  (double) session.createQuery("select avg(salario) from Empleados ").uniqueResult();
+	System.out.println("Media de salario de empleados: " + media);
+
+		
+	System.out.println("------------------------");
+	Double maxi =  (Double) session.createQuery("select max(salario) from Empleados ").uniqueResult();
+	System.out.println("Máximo de salario de empleados: " + maxi);
+
+	session.close();
+		
+	}
+
+private static void listardepartamentosSet() {
+	Session session = sesion.openSession();
+	Departamentos depar = new Departamentos();
+	
+	Query<Departamentos> q = session.createQuery("from Departamentos");
+	List<Departamentos> lista = q.getResultList(); //)list();
+	int num = lista.size();
+	System.out.println("Número de departamentos: " + num);
+	for (int i = 0; i < num; i++) {
+		// extraer el objeto
+		depar = (Departamentos) lista.get(i);
+		// obtenemos empleados
+		Set<Empleados> listaemple = depar.getEmpleadoses();
+		Iterator<Empleados> it = listaemple.iterator();
+		System.out.println();
+		System.out.println("Num dep: " + depar.getDeptNo() +
+			" Nombre Dep:" + depar.getDnombre() +
+			"  Localidad:" + depar.getLoc() +
+			"  Número de empleados: "+ depar.getEmpleadoses().size());
+		System.out.printf("%10s %15s %15s %15s %15s %n",
+					"EMPNO", "APELLIDO","OFICIO","FECHAALTA", "SALARIO");
+		System.out.printf("%10s %15s %15s %15s %15s %n",
+					"----------", "---------------","---------------",
+"---------------", "---------------");
+		float totalsalario=0;
+		while (it.hasNext()) {
+			Empleados emple = new Empleados();
+			emple = it.next();
+			System.out.printf("%10s %15s %15s %15s %15s %n",
+				emple.getEmpNo(), emple.getApellido(),emple.getOficio(),
+				emple.getFechaAlt(), emple.getSalario());
+			totalsalario = (float) (totalsalario +  emple.getSalario());
+		}
+		System.out.printf("%10s %15s %15s %15s %15s %n","----------", 
+ "---------------","---------------","---------------", "---------------");
+		System.out.printf("%-26s %15s %15s %15s %n",
+					"Total salario: ","","", totalsalario);
+		System.out.printf("%10s %15s %15s %15s %15s %n","----------",
+ "---------------","---------------","---------------", "---------------");
+	}
+		
+		session.close();
+}
+
+
+private static void listaremplesdeundep(int dep) {
+	Session session = sesion.openSession();
+	Empleados emp = new Empleados();
+	System.out.println("-------------------------------");
+
+ 	Query <Empleados> q= session.createQuery("from Empleados e where e.departamentos.deptNo =:id");
+	q.setParameter("id", dep);
+	
+ 	List<Empleados> lista = q.list();
+	
+	int num = lista.size();
+	System.out.println("Número de empleados del departamento " + dep+" : "+num);
+	for (int i = 0; i < num; i++) {
+		// extraer el objeto
+		emp = (Empleados) lista.get(i);
+		System.out.println(emp.getEmpNo() + "*" + emp.getApellido());
+	}
+	
+	session.close();
+	
+}
+
+
+private static void listardepartamentos2() {
+	Session session = sesion.openSession();
+	Departamentos depar = new Departamentos();
+	System.out.println("-------------------------------");
+
+ 	TypedQuery <Departamentos> q= session.createQuery("from Departamentos");
+	List<Departamentos> lista = q.getResultList();
+	
+	int num = lista.size();
+	System.out.println("Número de departamentos: " + num);
+	for (int i = 0; i < num; i++) {
+		// extraer el objeto
+		depar = (Departamentos) lista.get(i);
+		System.out.println(depar.getDeptNo() + "*" + depar.getDnombre());
+	}
+	
+	session.close();
+}
+
+	private static void listardepartamentos() {
+	
+		Session session=sesion.openSession();
+		Departamentos depar=new Departamentos();
+		System.out.println("--------------------------------------");
+		Query<Departamentos> q=session.createQuery("from Departamentos");
+		List<Departamentos> lista=q.list();
+		int num=lista.size();
+		System.out.println("Número de departamentos: "+num);
+		
+		Empleados emp=new Empleados();
+		System.out.println("--------------------------------------");
+		Query<Empleados> q2=session.createQuery("from Empleados t where t.departamentos.deptNo= :id ");
+		
+		
+		
+		
+		for(int i=0; i<num;i++) {
+
+			//extraer el objeto 
+			depar=(Departamentos) lista.get(i);
+
+			q2.setParameter("id", depar.getDeptNo());
+			List<Empleados> listaEmp=q2.list();
+			int num2=listaEmp.size();
+			System.out.println("Num dep: "+depar.getDeptNo()+"  Nombre: "+depar.getDnombre()+"  Localidad: "+depar.getLoc()+" Número de empleados: "+num2);
+			
+			if(num2>0) {
+				System.out.printf("%10s %-15s %14s %-14s %10s %n", "EMPNO", "APELLIDO", "OFICIO", "FECHAALTA","SALARIO");
+				System.out.printf("%10s %-15s %14s %-14s %10s %n", "----------", "---------------", "--------------", "--------------","----------");
+				double totalsalario=0;
+				for(int j=0; j<num2;j++) {
+					emp=(Empleados) listaEmp.get(j);
+					System.out.printf("%10s %-15s %14s %-14s %10s %n", emp.getEmpNo(), emp.getApellido(), emp.getOficio(), emp.getFechaAlt(),emp.getSalario());
+					totalsalario=totalsalario+emp.getSalario();
+				}
+				System.out.printf("%10s %-15s %14s %-14s %10s %n", "----------", "---------------", "--------------", "--------------","----------");
+				System.out.printf("%-26s %15s %15s %15s %n",
+						"Total salario: ","","", totalsalario);				System.out.printf("%10s %-15s %14s %-14s %10s %n", "----------", "---------------", "--------------", "--------------","----------");
+
+			}else {
+				System.out.println("El departamento no disponde de empleados");
+			}
+			
+
+			
+		}
+		
+		session.close();
 	
 }
 

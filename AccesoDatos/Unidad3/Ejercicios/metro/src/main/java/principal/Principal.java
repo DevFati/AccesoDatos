@@ -38,6 +38,32 @@ public static void main(String[] args) {
 	borrarTren(1);
 	
 	borrarestacion(1);
+	
+	//Ver por cada estacion su numero d accesos y numero de lineas 
+	
+	detallesEstacion();
+}
+
+private static void detallesEstacion() {
+	Session session = sesion.openSession();
+	TEstaciones estacion=new TEstaciones();
+	String con="from TEstaciones";
+	Query q = session.createQuery(con,TEstaciones.class);
+	
+	List<TEstaciones> lista=q.getResultList();
+	int num=lista.size();
+	 System.out.printf("%-20s %-30s %-30s %20s %20s%n","COD ESTACION:","NOMBRE","DIRECCION", "NUMERO ACCESOS", "NUMERO DE LINEAS");
+	 System.out.printf("%-20s %-30s %-30s %20s %20s%n","--------------------","------------------------------","------------------------------", "--------------------", "--------------------");
+
+	for(int i=0; i<num;i++) {
+		//extraemos el objeto 
+		estacion=(TEstaciones) lista.get(i);
+		 System.out.printf("%-20s %-30s %-30s %20s %20s%n",estacion.getCodEstacion(),estacion.getNombre(),estacion.getDireccion(), estacion.getTAccesoses().size(), estacion.getTLineaEstacions().size());
+
+	}
+
+	session.close();
+	
 }
 
 private static void borrarestacion(int cod) {

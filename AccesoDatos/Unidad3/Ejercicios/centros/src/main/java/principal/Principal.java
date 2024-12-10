@@ -1,6 +1,7 @@
 package principal;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,6 +9,7 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import clases.C1Asignaturas;
 import clases.C1Centros;
@@ -37,10 +39,64 @@ public class Principal {
 
 		borrarAsignatura("IF000666"); //No existe
 
+		//listar todos los centros y sus profesores 
 		
+		listarCentrosySusProfes();
 		
 
 		
+	}
+
+	private static void listarCentrosySusProfes() {
+		Session session = sesion.openSession();
+		C1Centros centros=new C1Centros();
+		String con="from C1Centros";
+		Query q = session.createQuery(con,C1Centros.class);
+		
+		List<C1Centros> lista=q.getResultList();
+		int num=lista.size();
+		
+		System.out.println("Número de centros: "+num);
+		int nummaxAsig=0;
+		String nomMax="";
+		for(int i=0; i<num;i++) {
+			//extraemos el objeto 
+			centros=(C1Centros) lista.get(i);
+			//obtenemos los profesores 
+			Set<C1Profesores> listaprof=centros.getC1Profesoreses();
+			int num2=listaprof.size();
+			System.out.println("Cod centro: "+centros.getCodCentro()+"   Nombre: "+centros.getNomCentro()+"  Número de profesores: "+num2);
+			if(num2>0) {
+				System.out.printf("%15s %30s %30s %30s %20s %n","CodProf", 
+						 "NombreProfesor","NombreEspecialidad","Nombre Jefe", "NúmAsig que imparte");	
+				System.out.printf("%15s %30s %30s %30s %20s %n","---------------", 
+						 "------------------------------","------------------------------","------------------------------", "--------------------");	
+				for (C1Profesores prof : listaprof) {
+					String nomJ="No tiene";
+					if(prof.getC1Profesores()!=null) {
+						nomJ=prof.getC1Profesores().getNombreApe();
+					}
+					System.out.printf("%15s %30s %30s %30s %20s %n",prof.getCodProf(), 
+							 prof.getNombreApe(),prof.getC1Especialidad().getNombreEspe(),nomJ, prof.getC1Asignaturases().size());	
+					
+					if(prof.getC1Asignaturases().size()>=nummaxAsig) {
+						if(nummaxAsig==prof.getC1Asignaturases().size()) {
+							nomMax=nomMax+prof.getNombreApe()+" . ";
+							
+						}else {
+							nomMax=prof.getNombreApe()+" . ";
+						}
+						nummaxAsig=prof.getC1Asignaturases().size();
+					}
+				}
+			}
+		
+		}
+		System.out.println("Nombre de profesor que imparte más asignaturas: "+nomMax);
+		
+		
+		
+		session.close();
 	}
 
 	private static void borrarAsignatura(String cod) {
