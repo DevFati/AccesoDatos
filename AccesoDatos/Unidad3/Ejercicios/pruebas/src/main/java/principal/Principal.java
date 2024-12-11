@@ -1,6 +1,9 @@
 package principal;
 
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -84,9 +87,117 @@ public static void main(String[] args) {
 		//
 		System.out.println("USAMOS UNIQUE RESULT: ");
 		consultauniqueresul();
+		
+		//CONSULTA CON PARAMETROS 
+		System.out.println("CONSULTA CON PARAMETROS");
+		consultasconparametros();
 	
+		//Consulta que devuelve objetos empleados y departamentos: 
+		consultaobjetos();
 	sesion.close();
 	
+}
+
+private static void consultaobjetos() {
+	Session session = sesion.openSession();
+
+	Query cons =session.createQuery("from Empleados e, Departamentos d where e.departamentos.deptNo=d.deptNo order by e.apellido",Object.class);
+	List datos=cons.list();
+	
+	for(int i=0; i<datos.size();i++) {
+		Object[] par = (Object[]) datos.get(i);
+		Empleados em = (Empleados) par[0]; // objeto empleado el primero
+		Departamentos de = (Departamentos) par[1]; // objeto departamento el segundo
+		System.out.println(em.getApellido() + "*" + em.getSalario() + "*" + 
+                  de.getDnombre() + "*" + de.getLoc());
+	}
+	session.close();
+}
+
+private static void consultasconparametros() {
+	Session session = sesion.openSession();
+	
+	//El siguiente ejemplo consulta el empleado con numero 7369
+	//utiliza un parametro nombrado 
+	String hql="from Empleados where empNo= :numemple";
+	//Utilizamos esta Query q pa todas las consultas 
+	
+	Query<Empleados> q=session.createQuery(hql,Empleados.class);
+	q.setParameter("numemple", (short)7369);
+	Empleados emple=(Empleados) q.uniqueResult();
+	
+	System.out.println("-----------------------");
+	System.out.println("Empleado número 7369");
+	System.out.printf("%s, %s %n", emple.getApellido(), emple.getOficio());
+	
+	//El siguiente ejemplo consulta los empledos cuyo numero de departamento es 10
+	//y el oficio DIRECTOR. Utiliza parámetros nombrados
+	
+	hql="from Empleados emp where emp.departamentos.deptNo= :ndep and emp.oficio=:ofi";
+	
+	q=session.createQuery(hql,Empleados.class);
+	System.out.println("-----------------------");
+	System.out.println("Directores del dep 10");
+	q.setParameter("ndep", (byte)10);
+	q.setParameter("ofi", "DIRECTOR");
+	List<Empleados> lista=q.list();
+	
+	emple=new Empleados();
+	
+	for(int i=0; i<lista.size();i++) {
+		emple=lista.get(i);
+		System.out.println(emple.getApellido());
+	}
+	
+	
+	//El siguiente ejemplo obtiene los empleados cuya fecha de alta es 
+	//1991-12-03. Utiliza parametro nombrado: 
+	
+	SimpleDateFormat formatoDelTexto=new SimpleDateFormat("yyyy-MM-dd");
+	String strFecha="1991-12-03";
+	formatoDelTexto.setLenient(false); //no se permiten fechas que no sean validas
+	java.util.Date fecha=null;
+	try {
+		fecha=(Date) formatoDelTexto.parse(strFecha);
+		hql="from Empleados where fechaAlt= :fechalta";
+		q=session.createQuery(hql,Empleados.class);
+		q.setParameter("fechalta", fecha);
+		
+		List<Empleados> lista4=q.list();
+		
+		System.out.println("-----------------------");
+		System.out.println("Empleados con fecha alta: "+strFecha);
+		for(int i=0; i<lista4.size();i++) {
+			emple=lista4.get(i);
+			System.out.println(emple.getApellido());
+		}
+	}catch (ParseException e) {
+		System.out.println("FECHA ERRONEA. NO SE PUEDE CONSULTAR");
+		e.printStackTrace();
+	}
+	
+	//El siguiente ejemplo asigna a un parametro nombrado llamado :listadep una 
+	//coleccion de valores llamada numeros con los valores 10 y 20 para obtener 
+	//aquellos empleados cuyo numero de departamento sea 10 o 20; se usa el metodo 
+	//setParameerList
+	
+	List<Byte> numeros=new ArrayList<Byte>();
+	numeros.add((byte) 10);
+	numeros.add((byte)20);
+	
+	hql="from Empleados emp where emp.departamentos.deptNo in (:listadep) order by emp.departamentos.deptNo";
+	q=session.createQuery(hql,Empleados.class);
+	q.setParameterList("listadep", numeros);
+	List<Empleados> lista3=q.list();
+	System.out.println("----------------------------");
+	System.out.println("Empleados del dep 10 y 20");
+	
+	for(int i=0;i<lista3.size();i++) {
+		emple =lista3.get(i);
+		System.out.println(emple.getApellido());
+	}
+	
+	session.close();
 }
 
 private static void consultauniqueresul() {

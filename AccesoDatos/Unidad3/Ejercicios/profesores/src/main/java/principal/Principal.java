@@ -32,7 +32,8 @@ public class Principal {
 
 		System.out.println("--------------------------");
 
-		mostrarDatosProfesor(8888); //No existe;
+		mostrarDatosProfesor(8888); //No existe;		
+		
 		
 		sesion.close();
 	}
@@ -104,6 +105,7 @@ public class Principal {
 			
 			
 		}
+		session.close();
 		
 	}
 

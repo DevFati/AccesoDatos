@@ -63,14 +63,11 @@ public class Principal {
 	asignarAsignaturaAProfesor(1000,"IF0006"); //No tiene la asignatura, se le añade
 
 	asignarAsignaturaAProfesor(1000,"IF0001"); //Ya tiene la asignatura
-
 	
 
 	borrarAsignatura("IF0002"); //Existe y tiene registros
 
 	borrarAsignatura("IF000666"); //No existe
-
-	
 
 	listarCentros();
 

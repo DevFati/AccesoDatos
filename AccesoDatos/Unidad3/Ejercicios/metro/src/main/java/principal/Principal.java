@@ -1,6 +1,7 @@
 package principal;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+
+import clases.TAccesos;
 import clases.TCocheras;
 import clases.TEstaciones;
 import clases.TLineaEstacion;
@@ -42,6 +45,89 @@ public static void main(String[] args) {
 	//Ver por cada estacion su numero d accesos y numero de lineas 
 	
 	detallesEstacion();
+	
+	// veraccesosporestacion();
+
+	System.out.println("VER ACCESSOS POR ESTACION: ");
+	System.out.println("-----Estacion existe");
+	veraccesosestacion(2);
+
+	System.out.println("-----Estacion sin accesos");
+	veraccesosestacion(21);
+
+	System.out.println("-----Estacion no existe");
+	veraccesosestacion(210);
+	
+	//Obtener los trenes de la serie 5000, 6000 y 8000
+	
+System.out.println("LISTA DE PARAMETROS: ");
+	List<String> tipos = new ArrayList<String>();
+	tipos.add("SERIE 3000");
+	tipos.add("SERIE 8400");
+
+	vertrenesportipo(tipos);
+	
+	List<String> tipo2s = new ArrayList<String>();
+
+	tipo2s = new ArrayList<String>();
+	tipo2s.add("SERIE 5000");
+	tipo2s.add("SERIE 9000");
+	tipo2s.add("SERIE 8000");
+	
+	vertrenesportipo(tipo2s);
+
+	sesion.close();
+}
+
+private static void vertrenesportipo(List<String> tipos) {	
+	Session session = sesion.openSession();
+	TTrenes tren=new TTrenes();
+	String hql="from TTrenes e where e.tipo in  (:listatren) ";
+	Query q=session.createQuery(hql,TTrenes.class);
+	q.setParameterList("listatren", tipos);
+	List<TTrenes> lista3=q.list();
+	System.out.println("----------------------------");
+	
+	
+	for(int i=0;i<lista3.size();i++) {
+		tren =lista3.get(i);
+		System.out.println("Tren tipo:  "+tren.getTipo()+ "  Nombre tren: "+tren.getNombre());
+	}
+	
+	session.close();
+	
+}
+
+private static void veraccesosestacion(int codestacion) {
+	Session session = sesion.openSession();
+	TAccesos accesos=new TAccesos();
+	TEstaciones est=session.get(TEstaciones.class, codestacion);
+	if(est==null) {
+		System.out.println("ESTACION NO EXISTE: "+codestacion);
+	}else {
+	
+	String con="from TAccesos t where t.TEstaciones.codEstacion= :cod";
+	Query q = session.createQuery(con,TAccesos.class);
+	q.setParameter("cod", codestacion);
+	List<TAccesos> lista=q.list();
+	int num=lista.size();
+	
+	 System.out.println("CODESTACION:       "+codestacion);
+	
+if(num>0) {
+	 System.out.printf("%-20s %-30s%n", "CODIGOACCESO","DESCRIPCION");
+	 System.out.printf("%-20s %-30s %n","--------------------","------------------------------");
+	 for(int i=0; i<num;i++) {
+		 accesos= (TAccesos) lista.get(i);
+		 System.out.printf("%-20s %-30s%n", accesos.getCodAcceso(),accesos.getDescripcion());
+	 }
+}else {
+	System.out.println("SIN ACCESOS");
+}
+	
+	}
+	session.close();
+	
 }
 
 private static void detallesEstacion() {
