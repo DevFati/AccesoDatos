@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 7:02:12 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.T3clientes" optimistic-lock="none" table="T3CLIENTES">
+        <id name="codigocliente" type="big_integer">
+            <column name="CODIGOCLIENTE" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombrecliente" type="string">
+            <column length="50" name="NOMBRECLIENTE" not-null="true"/>
+        </property>
+        <property name="apellido" type="string">
+            <column length="30" name="APELLIDO"/>
+        </property>
+        <property name="telefono" type="string">
+            <column length="15" name="TELEFONO"/>
+        </property>
+        <property name="direccion" type="string">
+            <column length="40" name="DIRECCION"/>
+        </property>
+        <property name="ciudad" type="string">
+            <column length="30" name="CIUDAD" not-null="true"/>
+        </property>
+        <property name="region" type="string">
+            <column length="30" name="REGION"/>
+        </property>
+        <property name="pais" type="string">
+            <column length="30" name="PAIS" not-null="true"/>
+        </property>
+        <property name="codigopostal" type="string">
+            <column length="10" name="CODIGOPOSTAL"/>
+        </property>
+        <property name="limitecredito" type="java.lang.Double">
+            <column name="LIMITECREDITO" precision="126" scale="0"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="t3reservases" table="T3RESERVAS">
+            <key>
+                <column name="CODIGOCLIENTE" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.T3reservas"/>
+        </set>
+    </class>
+</hibernate-mapping>

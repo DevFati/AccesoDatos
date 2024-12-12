@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 7:02:12 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.T3reservas" optimistic-lock="none" table="T3RESERVAS">
+        <id name="codreserva" type="big_integer">
+            <column name="CODRESERVA" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.T3clientes" fetch="select" name="t3clientes">
+            <column name="CODIGOCLIENTE" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.T3habitaciones" fetch="select" name="t3habitaciones">
+            <column length="4" name="NUMHABITACION" not-null="true"/>
+        </many-to-one>
+        <property name="camassupletorias" type="big_integer">
+            <column name="CAMASSUPLETORIAS" precision="22" scale="0"/>
+        </property>
+        <property name="fechaentrada" type="date">
+            <column length="7" name="FECHAENTRADA" not-null="true"/>
+        </property>
+        <property name="fechasalida" type="date">
+            <column length="7" name="FECHASALIDA" not-null="true"/>
+        </property>
+        <property name="descuento" type="big_integer">
+            <column name="DESCUENTO" precision="22" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

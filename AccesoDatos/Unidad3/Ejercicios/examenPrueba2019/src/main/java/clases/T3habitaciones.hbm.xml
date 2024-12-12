@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 7:02:12 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.T3habitaciones" optimistic-lock="none" table="T3HABITACIONES">
+        <id name="numhabitacion" type="string">
+            <column length="4" name="NUMHABITACION"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.T3tiposhabitaciones" fetch="select" name="t3tiposhabitaciones">
+            <column length="30" name="TIPO"/>
+        </many-to-one>
+        <property name="nombrehabitacion" type="string">
+            <column length="50" name="NOMBREHABITACION"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="t3reservases" table="T3RESERVAS">
+            <key>
+                <column length="4" name="NUMHABITACION" not-null="true"/>
+            </key>
+            <one-to-many class="clases.T3reservas"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -94,6 +94,8 @@ public static void main(String[] args) {
 	
 		//Consulta que devuelve objetos empleados y departamentos: 
 		consultaobjetos();
+		
+		
 	sesion.close();
 	
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 12:09:51 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Cursos" optimistic-lock="none" table="CURSOS">
+        <id name="codCurso" type="int">
+            <column name="COD_CURSO" precision="5" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.Centros" fetch="select" name="centros">
+            <column name="COD_CENTRO" precision="5" scale="0"/>
+        </many-to-one>
+        <property name="denominacion" type="string">
+            <column length="25" name="DENOMINACION"/>
+        </property>
+        <property name="costeMatricula" type="java.lang.Integer">
+            <column name="COSTE_MATRICULA" precision="6" scale="0"/>
+        </property>
+        <property name="numAlumnos" type="java.lang.Integer">
+            <column name="NUM_ALUMNOS" precision="5" scale="0"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="asignaturases" table="ASIGNATURAS">
+            <key>
+                <column name="COD_CURSO" precision="5" scale="0"/>
+            </key>
+            <one-to-many class="clases.Asignaturas"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="alumnoses" table="ALUMNOS">
+            <key>
+                <column name="COD_CURSO" precision="5" scale="0"/>
+            </key>
+            <one-to-many class="clases.Alumnos"/>
+        </set>
+    </class>
+</hibernate-mapping>

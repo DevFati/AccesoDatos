@@ -6,15 +6,17 @@
         <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
         <property name="hibernate.connection.password">dam</property>
         <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
-        <property name="hibernate.connection.username">EXA19</property>
-        <property name="hibernate.default_schema">EXA19</property>
+        <property name="hibernate.connection.username">COLEGIO</property>
+        <property name="hibernate.default_schema">COLEGIO</property>
         <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
         <property name="hibernate.hbm2ddl.auto">none</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <mapping resource="clases/T3reservas.hbm.xml"/>
-        <mapping resource="clases/T3tiposhabitaciones.hbm.xml"/>
-        <mapping resource="clases/T3clientes.hbm.xml"/>
-        <mapping resource="clases/T3habitaciones.hbm.xml"/>
+        <mapping resource="clases/Evaluaciones.hbm.xml"/>
+        <mapping resource="clases/Departamentos.hbm.xml"/>
+        <mapping resource="clases/Alumnos.hbm.xml"/>
+        <mapping resource="clases/Asignaturas.hbm.xml"/>
+        <mapping resource="clases/Centros.hbm.xml"/>
+        <mapping resource="clases/Cursos.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

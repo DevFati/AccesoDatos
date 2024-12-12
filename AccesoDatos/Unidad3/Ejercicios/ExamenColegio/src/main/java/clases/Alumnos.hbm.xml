@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 12:09:51 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Alumnos" optimistic-lock="none" table="ALUMNOS">
+        <id name="numAlumno" type="int">
+            <column name="NUM_ALUMNO" precision="5" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.Cursos" fetch="select" name="cursos">
+            <column name="COD_CURSO" precision="5" scale="0"/>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column length="25" name="NOMBRE"/>
+        </property>
+        <property name="direccion" type="string">
+            <column length="25" name="DIRECCION"/>
+        </property>
+        <property name="tlf" type="string">
+            <column length="10" name="TLF"/>
+        </property>
+        <property name="notaMedia" type="big_decimal">
+            <column name="NOTA_MEDIA" precision="3" scale="1"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="evaluacioneses" table="EVALUACIONES">
+            <key>
+                <column name="NUM_ALUMNO" not-null="true" precision="5" scale="0"/>
+            </key>
+            <one-to-many class="clases.Evaluaciones"/>
+        </set>
+    </class>
+</hibernate-mapping>

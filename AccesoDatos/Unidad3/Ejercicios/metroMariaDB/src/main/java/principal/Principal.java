@@ -27,10 +27,10 @@ public class Principal {
 	
 		
 		// insertar trenes con insert
-		insertarconinsert();
+	//	insertarconinsert();
 
 		
-		insertartrenesnuevos();
+	//	insertartrenesnuevos();
 		// listarlineasestacionesaccesos();
 
 		// veraccesosporestacion();

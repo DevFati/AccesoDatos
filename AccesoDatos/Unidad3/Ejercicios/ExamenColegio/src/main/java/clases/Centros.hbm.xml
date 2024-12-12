@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 12:09:51 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Centros" optimistic-lock="none" table="CENTROS">
+        <id name="codCentro" type="int">
+            <column name="COD_CENTRO" precision="5" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="25" name="NOMBRE"/>
+        </property>
+        <property name="localidad" type="string">
+            <column length="20" name="LOCALIDAD"/>
+        </property>
+        <property name="tlf" type="string">
+            <column length="10" name="TLF"/>
+        </property>
+        <property name="numAlumnos" type="java.lang.Integer">
+            <column name="NUM_ALUMNOS" precision="5" scale="0"/>
+        </property>
+        <property name="numCursos" type="java.lang.Integer">
+            <column name="NUM_CURSOS" precision="5" scale="0"/>
+        </property>
+        <property name="presupuesto" type="java.lang.Integer">
+            <column name="PRESUPUESTO" precision="7" scale="0"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="cursoses" table="CURSOS">
+            <key>
+                <column name="COD_CENTRO" precision="5" scale="0"/>
+            </key>
+            <one-to-many class="clases.Cursos"/>
+        </set>
+    </class>
+</hibernate-mapping>
