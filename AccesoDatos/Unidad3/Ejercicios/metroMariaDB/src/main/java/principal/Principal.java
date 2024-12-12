@@ -30,7 +30,7 @@ public class Principal {
 	//	insertarconinsert();
 
 		
-	//	insertartrenesnuevos();
+		insertartrenesnuevos();
 		// listarlineasestacionesaccesos();
 
 		// veraccesosporestacion();

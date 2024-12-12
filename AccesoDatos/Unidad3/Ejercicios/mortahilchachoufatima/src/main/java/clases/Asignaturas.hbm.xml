@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 19:18:11 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Asignaturas" optimistic-lock="none" table="ASIGNATURAS">
+        <id name="codasig" type="big_integer">
+            <column name="CODASIG" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombreasig" type="string">
+            <column length="20" name="NOMBREASIG"/>
+        </property>
+        <property name="precioasig" type="big_integer">
+            <column name="PRECIOASIG" precision="22" scale="0"/>
+        </property>
+        <property name="tipoasig" type="java.lang.Character">
+            <column length="1" name="TIPOASIG"/>
+        </property>
+        <property name="creditos" type="big_integer">
+            <column name="CREDITOS" precision="22" scale="0"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="cursoasigs" table="CURSOASIG">
+            <key>
+                <column name="CODASIG" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Cursoasig"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="matriculases" table="MATRICULAS">
+            <key>
+                <column name="CODASIG" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Matriculas"/>
+        </set>
+    </class>
+</hibernate-mapping>

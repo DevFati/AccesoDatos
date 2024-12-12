@@ -466,7 +466,7 @@ private static void listardepartamentos2() {
 			System.out.println("El departamento existe, LO MODIFICO");
 			dep.setDnombre(nom);
 			dep.setLoc(loc);
-			session.persist(dep);
+			session.merge(dep);
 		}
 		
 		tx.commit();

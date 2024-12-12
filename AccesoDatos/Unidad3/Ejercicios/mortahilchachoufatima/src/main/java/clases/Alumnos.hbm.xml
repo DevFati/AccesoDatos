@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 19:18:11 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Alumnos" optimistic-lock="none" table="ALUMNOS">
+        <id name="codalum" type="big_integer">
+            <column name="CODALUM" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.Alumnos" fetch="select" name="alumnos">
+            <column name="CODREPRESENTANTE" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.Cursos" fetch="select" name="cursos">
+            <column name="CODCURSO" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column length="20" name="NOMBRE"/>
+        </property>
+        <property name="direccion" type="string">
+            <column length="20" name="DIRECCION"/>
+        </property>
+        <property name="poblacion" type="string">
+            <column length="20" name="POBLACION"/>
+        </property>
+        <property name="telef" type="string">
+            <column length="10" name="TELEF"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="alumnoses" table="ALUMNOS">
+            <key>
+                <column name="CODREPRESENTANTE" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Alumnos"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="matriculases" table="MATRICULAS">
+            <key>
+                <column name="CODALUM" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Matriculas"/>
+        </set>
+    </class>
+</hibernate-mapping>

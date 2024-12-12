@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 10 dic 2024, 13:38:22 by Hibernate Tools 5.5.9.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Etapas" optimistic-lock="none" table="ETAPAS">
+        <id name="codigoetapa" type="big_integer">
+            <column name="CODIGOETAPA" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.Ciclistas" fetch="select" name="ciclistas">
+            <column name="CICLISTAGANADOR" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="tipoetapa" type="string">
+            <column length="35" name="TIPOETAPA" not-null="true"/>
+        </property>
+        <property name="fechasalida" type="string">
+            <column length="45" name="FECHASALIDA" not-null="true"/>
+        </property>
+        <property name="pobsalida" type="string">
+            <column length="65" name="POBSALIDA" not-null="true"/>
+        </property>
+        <property name="pobllegada" type="string">
+            <column length="65" name="POBLLEGADA" not-null="true"/>
+        </property>
+        <property name="km" type="big_decimal">
+            <column name="KM" not-null="true" precision="6"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="llevas" table="LLEVA">
+            <key>
+                <column name="NUMETAPA" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Lleva"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="tramospuertoses" table="TRAMOSPUERTOS">
+            <key>
+                <column name="NUMETAPA" not-null="true" precision="22" scale="0"/>
+            </key>
+            <one-to-many class="clases.Tramospuertos"/>
+        </set>
+    </class>
+</hibernate-mapping>

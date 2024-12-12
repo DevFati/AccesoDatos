@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="CICLISTAS2" match-name="CAMISETAS"/>
+  <table-filter match-schema="CICLISTAS2" match-name="CICLISTAS"/>
+  <table-filter match-schema="CICLISTAS2" match-name="EQUIPOS"/>
+  <table-filter match-schema="CICLISTAS2" match-name="ETAPAS"/>
+  <table-filter match-schema="CICLISTAS2" match-name="LLEVA"/>
+  <table-filter match-schema="CICLISTAS2" match-name="RESUMEN_CAMISETAS"/>
+  <table-filter match-schema="CICLISTAS2" match-name="TRAMOSPUERTOS"/>
+</hibernate-reverse-engineering>

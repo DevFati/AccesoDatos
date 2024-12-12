@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 19:18:11 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Matriculas" optimistic-lock="none" table="MATRICULAS">
+        <composite-id class="clases.MatriculasId" name="id">
+            <key-property name="codalum" type="big_integer">
+                <column name="CODALUM" precision="22" scale="0"/>
+            </key-property>
+            <key-property name="codasig" type="big_integer">
+                <column name="CODASIG" precision="22" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="clases.Alumnos" fetch="select" insert="false" name="alumnos" update="false">
+            <column name="CODALUM" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.Asignaturas" fetch="select" insert="false" name="asignaturas" update="false">
+            <column name="CODASIG" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="fechamatr" type="date">
+            <column length="7" name="FECHAMATR"/>
+        </property>
+        <property name="notaasig" type="big_integer">
+            <column name="NOTAASIG" precision="22" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

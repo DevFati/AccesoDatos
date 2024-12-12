@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">CICLISTAS2</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">CICLISTAS2</property>
+        <property name="hibernate.default_schema">CICLISTAS2</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="hibernate.hbm2ddl.auto">none</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="clases/Tramospuertos.hbm.xml"/>
+        <mapping resource="clases/Camisetas.hbm.xml"/>
+        <mapping resource="clases/Ciclistas.hbm.xml"/>
+        <mapping resource="clases/Etapas.hbm.xml"/>
+        <mapping resource="clases/Equipos.hbm.xml"/>
+        <mapping resource="clases/Lleva.hbm.xml"/>
+        <mapping resource="clases/ResumenCamisetas.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

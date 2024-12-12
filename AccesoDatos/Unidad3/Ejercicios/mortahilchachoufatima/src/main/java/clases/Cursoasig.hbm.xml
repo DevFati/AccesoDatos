@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2024, 19:18:11 by Hibernate Tools 5.4.33.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Cursoasig" optimistic-lock="none" table="CURSOASIG">
+        <composite-id class="clases.CursoasigId" name="id">
+            <key-property name="codcurso" type="big_integer">
+                <column name="CODCURSO" precision="22" scale="0"/>
+            </key-property>
+            <key-property name="codasig" type="big_integer">
+                <column name="CODASIG" precision="22" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="clases.Asignaturas" fetch="select" insert="false" name="asignaturas" update="false">
+            <column name="CODASIG" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.Cursos" fetch="select" insert="false" name="cursos" update="false">
+            <column name="CODCURSO" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="aula" type="string">
+            <column length="20" name="AULA"/>
+        </property>
+    </class>
+</hibernate-mapping>

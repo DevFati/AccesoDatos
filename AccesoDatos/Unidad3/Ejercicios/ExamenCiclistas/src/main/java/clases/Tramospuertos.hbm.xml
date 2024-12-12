@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 10 dic 2024, 13:38:22 by Hibernate Tools 5.5.9.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="clases.Tramospuertos" optimistic-lock="none" table="TRAMOSPUERTOS">
+        <id name="codigotramo" type="big_integer">
+            <column name="CODIGOTRAMO" precision="22" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="clases.Ciclistas" fetch="select" name="ciclistas">
+            <column name="CICLISTAGANADOR" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one class="clases.Etapas" fetch="select" name="etapas">
+            <column name="NUMETAPA" not-null="true" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="nombretramo" type="string">
+            <column length="50" name="NOMBRETRAMO" not-null="true"/>
+        </property>
+        <property name="km" type="big_decimal">
+            <column name="KM" not-null="true" precision="6"/>
+        </property>
+        <property name="categoria" type="big_integer">
+            <column name="CATEGORIA" not-null="true" precision="22" scale="0"/>
+        </property>
+        <property name="pendiente" type="string">
+            <column length="50" name="PENDIENTE" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
