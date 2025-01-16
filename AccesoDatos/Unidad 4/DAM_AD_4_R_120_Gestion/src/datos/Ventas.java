@@ -7,7 +7,8 @@ public class Ventas {
     private Clientes numcli ;
 	private int univen; 
 	private String fecha; 
-
+	private int totales; 
+	
 	public Ventas(){}
 	
 	public Ventas(int codventa, Articulos codarti, Clientes numcli, int univen,

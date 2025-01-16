@@ -16,19 +16,19 @@ public class CrearBD {
 		File fichero = new File("ARTICULOS.DAT");
 		if (fichero.delete())
 			   System.out.println("BD Borrada");
-		// creación de registros en la BD
+		// creaciï¿½n de registros en la BD
 		  ODB odb = ODBFactory.open("ARTICULOS.DAT");
-		  // creo los artículos
+		  // creo los artï¿½culos
 		  Articulos ar1 = new Articulos(1,"Mesas", 30, (float)100.5);
 		  Articulos ar2 = new Articulos(2,"Pupitres", 10, (float)150.7);
 		  Articulos ar3 = new Articulos(6,"Cuadernos", 100, (float)4.5);
 		  Articulos ar4 = new Articulos(8,"Tabletas", 10, (float)175.4);
-		  Articulos ar5 = new Articulos(9,"Bolígrafos", 100, (float)3.5);
+		  Articulos ar5 = new Articulos(9,"Bolï¿½grafos", 100, (float)3.5);
 		  Articulos ar6 = new Articulos(10,"Lapiceros", 300, (float)2.5);
 		  Articulos ar7 = new Articulos(14,"Sillas", 30, (float)120.5);
-		  Articulos ar8 = new Articulos(16,"Portátil", 25, (float)400.5);
+		  Articulos ar8 = new Articulos(16,"Portï¿½til", 25, (float)400.5);
 		
-		  Articulos ar11 = new Articulos(17,"Espejo baño", 20, (float)100.5);
+		  Articulos ar11 = new Articulos(17,"Espejo baï¿½o", 20, (float)100.5);
 		  Articulos ar21 = new Articulos(18,"Reloj cocina", 10, (float)20.7);
 		  Articulos ar31 = new Articulos(20,"Tarjetero", 50, (float)14.5);
 		  Articulos ar41 = new Articulos(22,"Estuches", 110, (float)20.4);
@@ -38,7 +38,7 @@ public class CrearBD {
 		  Articulos ar81 = new Articulos(26,"Teclado", 25, (float)40.5);
 				
 		 
-		  // Almacenamos artículos 16 artículos
+		  // Almacenamos artï¿½culos 16 artï¿½culos
 		  odb.store(ar1); 
 		  odb.store(ar2);
 		  odb.store(ar3);
@@ -61,11 +61,11 @@ public class CrearBD {
 		  Clientes cli1 = new Clientes(1,"Antonio Ruiz","Talavera");
 		  Clientes cli2 = new Clientes(2,"La Alameda S.L.","Talavera");
 		  Clientes cli3 = new Clientes(7,"Los molinos CB","Madrid");
-		  Clientes cli4 = new Clientes(8,"Pedro Morán S.L.","Talavera");
-		  Clientes cli5 = new Clientes(12,"Azulejos Martín S.L.","Talavera");
+		  Clientes cli4 = new Clientes(8,"Pedro Morï¿½n S.L.","Talavera");
+		  Clientes cli5 = new Clientes(12,"Azulejos Martï¿½n S.L.","Talavera");
 		  Clientes cli6 = new Clientes(15,"Bar Girasol","Oropesa");
 		  Clientes cli7 = new Clientes(9,"Escuela Mayores","Talavera");
-		  Clientes cli8 = new Clientes(17,"Galería Madrid S.L.","Madrid");
+		  Clientes cli8 = new Clientes(17,"Galerï¿½a Madrid S.L.","Madrid");
 		  Clientes cli9 = new Clientes(19,"El corte Chino","Talavera");
 		  Clientes cli10 = new Clientes(20,"UNICAS S.A.","Oropesa");
 		  Clientes cli11 = new Clientes(21,"Deportivo SAS","Talavera");
@@ -101,6 +101,7 @@ public class CrearBD {
 		  
 		  odb.close();
           System.out.println("BASE DE DATOS CREADA");
+         
 
 	}
 

@@ -478,8 +478,8 @@ protected void visualizararticulos() {
 	  { 
 		 textArea.setText(" "); // limpiamos el textarea
 			
-		 textArea.append("CODARTI    DENOMINACION         STOCK         PVP    SUMA_UNIVEN  SUMA_IMPORTE  NUM_VENTAS     DESCUENTO? \n");
-		 textArea.append("=========================================================================================================== \n");
+		 textArea.append("CODARTI       DENOMINACION         STOCK         PVP    SUMA_UNIVEN     SUMA_IMPORTE     NUM_VENTAS      DESCUENTO? \n");
+		 textArea.append("==================================================================================================================== \n");
 		
 		 while (objects.hasNext()){
 			Articulos arti = objects.next();
@@ -493,7 +493,7 @@ protected void visualizararticulos() {
 			if (valores.size() == 0)
 			{
 				 System.out.println( " Articulo sin Ventas: "+ arti.getCodarti() );
-                 String patronn="%5d \t %-15s \t %5d \t %8.2f \t %6.1f \t %8.2f \t %5d";
+                 String patronn="%5d \t %-15s \t %5d \t %8.2f \t %6.1f \t %8.2f \t %5d \t %15s";
 			     
 			     String datoss =String.format(patronn,arti.getCodarti(),
 			               arti.getDenom(),

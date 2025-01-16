@@ -78,7 +78,7 @@ public class Inicio extends JFrame {
 		panel.add(btnMantenimientoDeVentas);
 		btnMantenimientoDeVentas.setFont(new Font("Arial Black", Font.BOLD, 12));
 		
-		JButton visualizacion = new JButton("Visualización de datos.");
+		JButton visualizacion = new JButton("Visualizaciï¿½n de datos.");
 		visualizacion.setBounds(71, 127, 264, 37);
 		panel.add(visualizacion);
 		visualizacion.addActionListener(new ActionListener() {
@@ -90,7 +90,7 @@ public class Inicio extends JFrame {
 		});
 		visualizacion.setFont(new Font("Arial Black", Font.BOLD, 12));
 		
-		JButton creacion = new JButton("Creación de datos.");
+		JButton creacion = new JButton("Creaciï¿½n de datos.");
 		creacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -115,4 +115,5 @@ public class Inicio extends JFrame {
 		btnMantenimientoDeArtculos.setBounds(71, 31, 264, 37);
 		panel.add(btnMantenimientoDeArtculos);
 	}
+	
 }
